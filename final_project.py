@@ -1,5 +1,6 @@
 import pygame
 pygame.init()
+pygame.mixer.init()
 ck = pygame.display.set_mode((800,600))   #  游戏窗口
 pygame.display.set_caption("選擇遊戲")    #  给窗口取个名 我小时候喜欢双截龙和拳皇
 clock = pygame.time.Clock()                         #  游戏刷新速度（我个人这么理解）
@@ -40,7 +41,6 @@ player21 = player21.render("player2", True, (0,255,255),(0,255,0))
 
 
 
-
 sub1 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
 sub1 = sub1.render("主題1", True, (0,0,255),(0,255,0))
 sub11 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
@@ -72,9 +72,18 @@ sub61 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
 sub61 = sub61.render("主題6", True, (0,255,255),(0,255,0))
 
 
-
 bg = pygame.image.load('C:/python/galaxy-dark-matter.jpg')
 bg.convert()
+
+# 音效部分
+
+# correct_sound = pygame.mixer.music()  # 答對音效
+# wrong_sound = pygame.mixer.music()  # 錯誤音效
+# fail_sound = pygame.mixer.music()  # 時間到淘汰音效
+bird_sound = pygame.mixer.Sound("C:/Users/USER/Downloads/音效.ogg")
+bird_sound.set_volume(0.2)
+
+# 題庫部分
 
 
 #  以下为选择开始界面鼠标检测结构。
@@ -83,6 +92,7 @@ while n1:
     clock.tick(30)
     buttons = pygame.mouse.get_pressed()
     x1, y1 = pygame.mouse.get_pos()
+    start_ck.blit(bg, (0,0))
     if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
         start_ck.blit(text11, (200, 100))
         start_ck.blit(text2, (200, 250))
@@ -138,79 +148,80 @@ while n2:
     ck.blit(start_ck2, (0, 0))
     buttons = pygame.mouse.get_pressed()
     x1, y1 = pygame.mouse.get_pos()
+    start_ck2.blit(bg, (0,0))
     if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:
-        start_ck2.blit(sub11,(200,100))
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub11,(250,100))
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub6,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題1題庫
     elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub21,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub21,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub6,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題2題庫
     elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub31,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub31,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub6,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題3題庫
     elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub41,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub41,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub6,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題4題庫
     elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub51,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub51,(250,300))
+        start_ck2.blit(sub6,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題5題庫
     elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub61,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub61,(400,300))
         if buttons[2]:
             n2 = False
             back = False
             # 激活主題6題庫
     else:
-        start_ck2.blit(sub1,(200,100)) 
-        start_ck2.blit(sub2,(350,100))
-        start_ck2.blit(sub3,(200,200))
-        start_ck2.blit(sub4,(350,200))
-        start_ck2.blit(sub5,(200,300))
-        start_ck2.blit(sub6,(350,300))
+        start_ck2.blit(sub1,(250,100)) 
+        start_ck2.blit(sub2,(400,100))
+        start_ck2.blit(sub3,(250,200))
+        start_ck2.blit(sub4,(400,200))
+        start_ck2.blit(sub5,(250,300))
+        start_ck2.blit(sub6,(400,300))
         
     pygame.display.update()
     for event in pygame.event.get():
@@ -238,6 +249,7 @@ if back is True:
         clock.tick(30)
         buttons = pygame.mouse.get_pressed()
         x1, y1 = pygame.mouse.get_pos()
+        start_ck.blit(bg, (0,0))
         if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
             start_ck.blit(text11, (200, 100))
             start_ck.blit(text2, (200, 250))
@@ -292,20 +304,22 @@ def main():
     screen = pygame.display.set_mode((800, 600)) 
     font = pygame.font.Font(None, 32) 
     clock = pygame.time.Clock() 
-    input_box = pygame.Rect(300, 100, 200, 32) 
+    input_box = pygame.Rect(310, 100, 200, 32) 
     color_inactive = pygame.Color('lightskyblue3') 
-    color_active = pygame.Color('dodgerblue2') 
+    color_active = pygame.Color('red2') 
     color = color_inactive 
     active = False 
     text = '' 
     done = False 
     count = 0
+    init_score1 = 0
+    init_score2 = 0
 
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 done = True 
-            if event.type == pygame.MOUSEBUTTONDOWN: 
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 # If the user clicked on the input_box rect. 
                 if input_box.collidepoint(event.pos): 
                     # Toggle the active variable. 
@@ -318,25 +332,43 @@ def main():
                 if active: 
                     if event.key == pygame.K_RETURN: 
                         print(text)
+                        print(type(text))
+                        if text == "j":  # 判斷回答正確
+                            if count % 2 == 0:
+                                init_score1 += 1
+                            else:
+                                init_score2 += 1
+                            count += 1
+                            bird_sound.play()
+                            #  correct_sound.play()  #  加答對音效
+                        else:  # 判斷回答錯誤
+                            pass
+                            #  wrong_sound.play()#  加答錯音效
                         text = ''
-                        count += 1
-                    elif event.key == pygame.K_BACKSPACE: 
+                    elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
-                    else: 
+                    else:
+                        bird_sound.stop()  # 開始輸入下一個答案就結束音效
                         text += event.unicode
                 else:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             done = True
 
-
-        screen.fill((255, 255, 255)) 
+        score1 = pygame.font.Font(None, 50)
+        score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))
+        score2 = pygame.font.Font(None, 50)
+        score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
+        screen.fill((255, 255, 255))
         # Render the current text.
         txt_surface = font.render(text, True, color)
         # Resize the box if the text is too long. 
         width = max(200, txt_surface.get_width()+10) 
         input_box.w = width
         # Blit the text.
+        screen.blit(bg, (0,0))
+        screen.blit(score1, (200,200))
+        screen.blit(score2, (600,200))
         if count % 2 == 0:
             screen.blit(player11, (150, 150))
             screen.blit(player2, (550, 150))
