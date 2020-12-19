@@ -177,7 +177,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題1題庫
+            # ques_list = ques1_list  激活主題1題庫
+            # ans_list = ans1_list  激活主題1解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub21,(400,100))
@@ -188,7 +189,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題2題庫
+            # ques_list = ques2_list  激活主題2題庫
+            # ans_list = ans2_list  激活主題2解答
     elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -199,7 +201,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題3題庫
+            # ques_list = ques3_list  激活主題3題庫
+            # ans_list = ans3_list  激活主題3解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -210,7 +213,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題4題庫
+            # ques_list = ques4_list  激活主題4題庫
+            # ans_list = ans4_list  激活主題4解答
     elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -221,7 +225,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題5題庫
+            # ques_list = ques5_list  激活主題5題庫
+            # ans_list = ans5_list  激活主題5解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -232,7 +237,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # 激活主題6題庫
+            # ques_list = ques6_list  激活主題6題庫
+            # ans_list = ans6_list  激活主題6解答
     else:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -338,60 +344,98 @@ def main():
     correct = 0
     ans_turn = 0
     shift_avail = True
+    ques_ans_number = 0  # 第一題 list中的第一項
     while not done:
+        # question = ques_list[ques_ans_number]
+        # answer_option = ans_list[ques_ans_number]
+        # correct_answer = ans_list[ques_ans_number][4]
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: 
+            if event.type == pygame.QUIT:
                 done = True 
 
             if event.type == pygame.KEYDOWN:
                 if shift_avail == True:
                     if event.key == pygame.K_LSHIFT:
-                        ans_turn = 1  # True代表p1
+                        ans_turn = 1  
                         print(ans_turn)
                         shift_avail = False
                     if event.key == pygame.K_RSHIFT:
-                        ans_turn = 2  # False代表p2
+                        ans_turn = 2  
                         print(ans_turn)
                         shift_avail = False
 
                 if event.key == pygame.K_a:
-                    answer = True
-                    if ans_turn == 1:
-                        init_score1 += 2
-                    elif ans_turn == 2:
-                        init_score2 += 2
-                    shift_avail = True
-                    ans_turn = 0
-                    # 跳下一個題目跟解答
+                    # answer = answer_option[0]
+                    # if answer == correct_answer:
+                        if ans_turn == 1:
+                            init_score1 += 2
+                        elif ans_turn == 2:
+                            init_score2 += 2
+                        shift_avail = True
+                        ans_turn = 0
+                    # else:
+                        if ans_turn == 1:
+                            init_score1 -= 1
+                            ans_turn = 2
+                        elif ans_turn == 2:
+                            init_score2 -= 1
+                            ans_turn = 1
+                            
                 elif event.key == pygame.K_b:
-                    answer = False
-                    if ans_turn == 1:
-                        init_score1 -= 1
-                        ans_turn = 2
-                    elif ans_turn == 2:
-                        init_score2 -= 1
-                        ans_turn = 1
+                    # answer = answer_option[1]
+                    # if answer == correct_answer:
+                        if ans_turn == 1:
+                            init_score1 += 2
+                        elif ans_turn == 2:
+                            init_score2 += 2
+                        shift_avail = True
+                        ans_turn = 0
+                    # else:
+                        if ans_turn == 1:
+                            init_score1 -= 1
+                            ans_turn = 2
+                        elif ans_turn == 2:
+                            init_score2 -= 1
+                            ans_turn = 1
+                            
                 elif event.key == pygame.K_c:
-                    answer = False
-                    if ans_turn == 1:
-                        init_score1 -= 1
-                        ans_turn = 2
-                    elif ans_turn == 2:
-                        init_score2 -= 1
-                        ans_turn = 1
+                    # answer = answer_option[2]
+                    # if answer == correct_answer:
+                        if ans_turn == 1:
+                            init_score1 += 2
+                        elif ans_turn == 2:
+                            init_score2 += 2
+                        shift_avail = True
+                        ans_turn = 0
+                    # else:
+                        if ans_turn == 1:
+                            init_score1 -= 1
+                            ans_turn = 2
+                        elif ans_turn == 2:
+                            init_score2 -= 1
+                            ans_turn = 1
+                            
                 elif event.key == pygame.K_d:
-                    answer = False
-                    if ans_turn == 1:
-                        init_score1 -= 1
-                        ans_turn = 2
-                    elif ans_turn == 2:
-                        init_score2 -= 1
-                        ans_turn = 1
+                    # answer = answer_option[3]
+                    # if answer == correct_answer:
+                        if ans_turn == 1:
+                            init_score1 += 2
+                        elif ans_turn == 2:
+                            init_score2 += 2
+                        shift_avail = True
+                        ans_turn = 0
+                    # else:
+                        if ans_turn == 1:
+                            init_score1 -= 1
+                            ans_turn = 2
+                        elif ans_turn == 2:
+                            init_score2 -= 1
+                            ans_turn = 1
+                            
                 elif event.key == pygame.K_RETURN:
                     ans_turn = 0
-                    # 跳下一個題目跟解答
+                    ques_ans_number += 1# 跳下一個題目跟解答
                     
-
                 else:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
@@ -402,18 +446,13 @@ def main():
         score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))
         score2 = pygame.font.Font(None, 50)
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
+        # question = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        # question = question.render(question, (0,0,0),(255,255,255))
         screen.fill((255, 255, 255))
-        # Render the current text.
-        # txt_surface = font.render(text, True, color)
-        # Resize the box if the text is too long. 
-        # width = max(200, txt_surface.get_width()+10) 
-        # input_box.w = width
-        # Blit the text.
+
         screen.blit(bg, (0,0))
-        # if correct == 1:
-            # screen.blit(correct_ans, (300,250))
-        # if correct == 2:
-            # screen.blit(wrong_ans, (300,250))
+
+        # screen.blit(question, (100,100))
         screen.blit(score1, (80,60))
         screen.blit(score2, (700,60))
         if ans_turn == 0:
