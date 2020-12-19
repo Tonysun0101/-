@@ -80,10 +80,10 @@ bg.convert()
 # 音效部分
 # background_music = pygame.mixer.music()  # 背景音樂
 
-# correct_sound = pygame.mixer.sound()  # 答對音效
-# correct_sound.set_volume(0.2)
-# wrong_sound = pygame.mixer.sound()  # 錯誤音效
-# wrong_sound.mixer.sound(0.2)
+correct_sound = pygame.mixer.Sound("C:/python/答對音效.ogg")  # 答對音效
+correct_sound.set_volume(0.2)
+wrong_sound = pygame.mixer.Sound("C:/python/答錯音效.ogg")  # 錯誤音效
+wrong_sound.set_volume(0.2)
 bird_sound = pygame.mixer.Sound("C:/Users/USER/Downloads/音效.ogg")
 bird_sound.set_volume(0.2)
 
@@ -404,7 +404,7 @@ def main():
                             init_score2 += 2
                         ans_turn = 0
                         correct = 1
-                        # correct_sound.play()
+                        correct_sound.play()
                     else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -413,7 +413,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
-                        # wrong_sound.play()
+                        wrong_sound.play()
                 elif event.key == pygame.K_b:
                     answer = answer_option[1]
                     word_color_a = (255,255,255)
@@ -427,7 +427,7 @@ def main():
                             init_score2 += 2
                         ans_turn = 0
                         correct = 1
-                        # correct_sound.play()
+                        correct_sound.play()
                     else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -436,7 +436,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
-                        # wrong_sound.play()
+                        wrong_sound.play()
                 elif event.key == pygame.K_c:
                     answer = answer_option[2]
                     word_color_a = (255,255,255)
@@ -450,7 +450,7 @@ def main():
                             init_score2 += 2
                         ans_turn = 0
                         correct = 1
-                        # correct_sound.play()
+                        correct_sound.play()
                     else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -459,7 +459,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
-                        # wrong_sound.play()
+                        wrong_sound.play()
                 elif event.key == pygame.K_d:
                     answer = answer_option[3]
                     word_color_a = (255,255,255)
@@ -473,7 +473,7 @@ def main():
                             init_score2 += 2
                         ans_turn = 0
                         correct = 1
-                        # correct_sound.play()
+                        correct_sound.play()
                     else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -482,7 +482,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
-                        # wrong_sound.play()
+                        wrong_sound.play()
                 elif event.key == pygame.K_RETURN:
                     word_color_a = (255,255,255)
                     word_color_b = (255,255,255)
@@ -563,7 +563,7 @@ def main():
             final_result = final_result.render(result, (0,0,255),(0,255,0))
             screen.blit(final_result, (325,300))
         pygame.display.flip()
-        clock.tick(30) 
+        clock.tick(30)
 
 if __name__ == '__main__': 
     pygame.init() 
