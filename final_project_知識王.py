@@ -373,6 +373,7 @@ def main():
                             init_score2 += 2
                         shift_avail = True
                         ans_turn = 0
+                        correct = 1
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -380,7 +381,7 @@ def main():
                         elif ans_turn == 2:
                             init_score2 -= 1
                             ans_turn = 1
-                            
+                        correct = 2
                 elif event.key == pygame.K_b:
                     # answer = answer_option[1]
                     # if answer == correct_answer:
@@ -390,6 +391,7 @@ def main():
                             init_score2 += 2
                         shift_avail = True
                         ans_turn = 0
+                        correct = 1
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -397,7 +399,7 @@ def main():
                         elif ans_turn == 2:
                             init_score2 -= 1
                             ans_turn = 1
-                            
+                        correct = 2
                 elif event.key == pygame.K_c:
                     # answer = answer_option[2]
                     # if answer == correct_answer:
@@ -407,6 +409,7 @@ def main():
                             init_score2 += 2
                         shift_avail = True
                         ans_turn = 0
+                        correct = 1
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -414,7 +417,7 @@ def main():
                         elif ans_turn == 2:
                             init_score2 -= 1
                             ans_turn = 1
-                            
+                        correct = 2
                 elif event.key == pygame.K_d:
                     # answer = answer_option[3]
                     # if answer == correct_answer:
@@ -424,6 +427,7 @@ def main():
                             init_score2 += 2
                         shift_avail = True
                         ans_turn = 0
+                        correct = 1
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -431,11 +435,11 @@ def main():
                         elif ans_turn == 2:
                             init_score2 -= 1
                             ans_turn = 1
-                            
+                        correct = 2
                 elif event.key == pygame.K_RETURN:
                     ans_turn = 0
                     ques_ans_number += 1# 跳下一個題目跟解答
-                    
+                    correct = 0
                 else:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
@@ -451,7 +455,10 @@ def main():
         screen.fill((255, 255, 255))
 
         screen.blit(bg, (0,0))
-
+        if correct == 1:
+            screen.blit(correct_ans, (350, 20))
+        elif correct == 2:
+            screen.blit(wrong_ans, (350,20))
         # screen.blit(question, (100,100))
         screen.blit(score1, (80,60))
         screen.blit(score2, (700,60))
