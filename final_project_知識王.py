@@ -76,10 +76,12 @@ bg = pygame.image.load('C:/python/galaxy-dark-matter.jpg')
 bg.convert()
 
 # 音效部分
+# background_music = pygame.mixer.music()  # 背景音樂
 
-# correct_sound = pygame.mixer.music()  # 答對音效
-# wrong_sound = pygame.mixer.music()  # 錯誤音效
-# fail_sound = pygame.mixer.music()  # 時間到淘汰音效
+# correct_sound = pygame.mixer.sound()  # 答對音效
+# correct_sound.set_volume(0.2)
+# wrong_sound = pygame.mixer.sound()  # 錯誤音效
+# wrong_sound.mixer.sound(0.2)
 bird_sound = pygame.mixer.Sound("C:/Users/USER/Downloads/音效.ogg")
 bird_sound.set_volume(0.2)
 
@@ -323,7 +325,7 @@ if back is True:
     pygame.display.update()
 
 
-pygame.display.set_caption("急速列車")
+pygame.display.set_caption("知識王")
 def main(): 
     screen = pygame.display.set_mode((800, 600)) 
     font = pygame.font.Font(None, 32) 
@@ -359,10 +361,12 @@ def main():
                         ans_turn = 1  
                         print(ans_turn)
                         shift_avail = False
+                        # background_music.stop()
                     if event.key == pygame.K_RSHIFT:
                         ans_turn = 2  
                         print(ans_turn)
                         shift_avail = False
+                        # background_music.stop()
 
                 if event.key == pygame.K_a:
                     # answer = answer_option[0]
@@ -374,6 +378,7 @@ def main():
                         shift_avail = True
                         ans_turn = 0
                         correct = 1
+                        # correct_sound.play()
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -382,6 +387,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
+                        # wrong_sound.play()
                 elif event.key == pygame.K_b:
                     # answer = answer_option[1]
                     # if answer == correct_answer:
@@ -392,6 +398,7 @@ def main():
                         shift_avail = True
                         ans_turn = 0
                         correct = 1
+                        # correct_sound.play()
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -400,6 +407,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
+                        # wrong_sound.play()
                 elif event.key == pygame.K_c:
                     # answer = answer_option[2]
                     # if answer == correct_answer:
@@ -410,6 +418,7 @@ def main():
                         shift_avail = True
                         ans_turn = 0
                         correct = 1
+                        # correct_sound.play()
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -418,6 +427,7 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
+                        # wrong_sound.play()
                 elif event.key == pygame.K_d:
                     # answer = answer_option[3]
                     # if answer == correct_answer:
@@ -428,6 +438,7 @@ def main():
                         shift_avail = True
                         ans_turn = 0
                         correct = 1
+                        # correct_sound.play()
                     # else:
                         if ans_turn == 1:
                             init_score1 -= 1
@@ -436,9 +447,14 @@ def main():
                             init_score2 -= 1
                             ans_turn = 1
                         correct = 2
+                        # wrong_sound.play()
                 elif event.key == pygame.K_RETURN:
                     ans_turn = 0
-                    ques_ans_number += 1# 跳下一個題目跟解答
+                    # background_music.play()
+                    if ques_ans_number != int:  # 一開始先不秀題目 按了enter後開始
+                        ques_ans_number = 0
+                    else:
+                        ques_ans_number += 1# 跳下一個題目跟解答
                     correct = 0
                 else:
                     if event.type == pygame.KEYDOWN:
@@ -459,7 +475,9 @@ def main():
             screen.blit(correct_ans, (350, 20))
         elif correct == 2:
             screen.blit(wrong_ans, (350,20))
-        # screen.blit(question, (100,100))
+            
+        # if ques_ans_number == int:
+            # screen.blit(question, (100,100))
         screen.blit(score1, (80,60))
         screen.blit(score2, (700,60))
         if ans_turn == 0:
