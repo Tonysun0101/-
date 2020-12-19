@@ -1,4 +1,6 @@
 import pygame
+import random
+# select = random.sample(range(0,5), 5)
 pygame.init()
 pygame.mixer.init()
 ck = pygame.display.set_mode((800,600))   #  游戏窗口
@@ -92,9 +94,6 @@ ans1_list = list()  # 答案雙層list 總共5項 前4個是選項 最後一個�
 ques2_list = list()  # 題目list
 ans2_list = list()  # 答案雙層list
 
-ques1_list = list()  # 題目list
-ans1_list = list()  # 答案雙層list
-
 ques3_list = list()  # 題目list
 ans3_list = list()  # 答案雙層list
 
@@ -106,6 +105,24 @@ ans5_list = list()  # 答案雙層list
 
 ques6_list = list()  # 題目list
 ans6_list = list()  # 答案雙層list
+
+sub_question1 = open("C:/python/NBA題目.txt", 'r', encoding = 'utf-8')
+sub_answer1 = open("C:/python/NBA選項.txt", 'r', encoding = 'utf-8')
+for a_ques1 in sub_question1:
+    a_ques1 = a_ques1.strip("\n")
+    ques1_list.append(a_ques1)
+
+for a_ans1 in sub_answer1:
+    a_ans1 = a_ans1.strip("\n")
+    a_ans_list1 = a_ans1.split(" ")
+    ans1_list.append(a_ans_list1)
+
+print(ques1_list)
+print(ans1_list)
+    
+
+
+
 #  以下为选择开始界面鼠标检测结构。
 n1 = True
 while n1:
@@ -179,8 +196,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques1_list  激活主題1題庫
-            # ans_list = ans1_list  激活主題1解答
+            ques_list = ques1_list  # 激活主題1題庫
+            ans_list = ans1_list  # 激活主題1解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub21,(400,100))
@@ -265,8 +282,8 @@ while n2:
 
             # exit() 直接终止当前正在执行的程序
             exit()
-
-
+select = random.sample(range(0,len(ques1_list)-1), 5)
+print(select)
 
 if back is True:
     pygame.display.set_caption("選擇遊戲")
@@ -346,11 +363,17 @@ def main():
     correct = 0
     ans_turn = 0
     shift_avail = True
-    ques_ans_number = 0  # 第一題 list中的第一項
+    init_number = 0
+    word_color_a = (255,255,255)
+    word_color_b = (255,255,255)
+    word_color_c = (255,255,255)
+    word_color_d = (255,255,255)
+    result = ""
     while not done:
-        # question = ques_list[ques_ans_number]
-        # answer_option = ans_list[ques_ans_number]
-        # correct_answer = ans_list[ques_ans_number][4]
+        ques_ans_number = select[init_number]  # 第一題 list中的第一項
+        current_question = ques_list[ques_ans_number]
+        answer_option = ans_list[ques_ans_number]
+        correct_answer = ans_list[ques_ans_number][4]
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True 
@@ -369,17 +392,20 @@ def main():
                         # background_music.stop()
 
                 if event.key == pygame.K_a:
-                    # answer = answer_option[0]
-                    # if answer == correct_answer:
+                    answer = answer_option[0]
+                    word_color_a = (255,0,0)
+                    word_color_b = (255,255,255)
+                    word_color_c = (255,255,255)
+                    word_color_d = (255,255,255)
+                    if answer == correct_answer:
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
                             init_score2 += 2
-                        shift_avail = True
                         ans_turn = 0
                         correct = 1
                         # correct_sound.play()
-                    # else:
+                    else:
                         if ans_turn == 1:
                             init_score1 -= 1
                             ans_turn = 2
@@ -389,17 +415,20 @@ def main():
                         correct = 2
                         # wrong_sound.play()
                 elif event.key == pygame.K_b:
-                    # answer = answer_option[1]
-                    # if answer == correct_answer:
+                    answer = answer_option[1]
+                    word_color_a = (255,255,255)
+                    word_color_b = (255,0,0)
+                    word_color_c = (255,255,255)
+                    word_color_d = (255,255,255)
+                    if answer == correct_answer:
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
                             init_score2 += 2
-                        shift_avail = True
                         ans_turn = 0
                         correct = 1
                         # correct_sound.play()
-                    # else:
+                    else:
                         if ans_turn == 1:
                             init_score1 -= 1
                             ans_turn = 2
@@ -409,17 +438,20 @@ def main():
                         correct = 2
                         # wrong_sound.play()
                 elif event.key == pygame.K_c:
-                    # answer = answer_option[2]
-                    # if answer == correct_answer:
+                    answer = answer_option[2]
+                    word_color_a = (255,255,255)
+                    word_color_b = (255,255,255)
+                    word_color_c = (255,0,0)
+                    word_color_d = (255,255,255)
+                    if answer == correct_answer:
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
                             init_score2 += 2
-                        shift_avail = True
                         ans_turn = 0
                         correct = 1
                         # correct_sound.play()
-                    # else:
+                    else:
                         if ans_turn == 1:
                             init_score1 -= 1
                             ans_turn = 2
@@ -429,17 +461,20 @@ def main():
                         correct = 2
                         # wrong_sound.play()
                 elif event.key == pygame.K_d:
-                    # answer = answer_option[3]
-                    # if answer == correct_answer:
+                    answer = answer_option[3]
+                    word_color_a = (255,255,255)
+                    word_color_b = (255,255,255)
+                    word_color_c = (255,255,255)
+                    word_color_d = (255,0,0)
+                    if answer == correct_answer:
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
                             init_score2 += 2
-                        shift_avail = True
                         ans_turn = 0
                         correct = 1
                         # correct_sound.play()
-                    # else:
+                    else:
                         if ans_turn == 1:
                             init_score1 -= 1
                             ans_turn = 2
@@ -449,35 +484,65 @@ def main():
                         correct = 2
                         # wrong_sound.play()
                 elif event.key == pygame.K_RETURN:
+                    word_color_a = (255,255,255)
+                    word_color_b = (255,255,255)
+                    word_color_c = (255,255,255)
+                    word_color_d = (255,255,255)
                     ans_turn = 0
+                    shift_avail = True
                     # background_music.play()
-                    if ques_ans_number != int:  # 一開始先不秀題目 按了enter後開始
-                        ques_ans_number = 0
+                    if init_number == len(select) - 1:
+                        if init_score1 > init_score2:
+                            result = "P1 win"
+                        elif init_score1 == init_score2:
+                            result = "Tie"
+                        elif init_score1 < init_score2:
+                            result = "P2 win"
+                    if init_number < len(select) - 1:
+                        if type(init_number) != int:  # 一開始先不秀題目 按了enter後開始
+                            init_number = 0
+                        else:
+                            init_number += 1# 跳下一個題目跟解答
                     else:
-                        ques_ans_number += 1# 跳下一個題目跟解答
+                        pass
                     correct = 0
                 else:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             done = True
-
-                            
+        screen.blit(bg, (0,0))
+        # print(question)
+        # print(type(question))
         score1 = pygame.font.Font(None, 50)
         score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))
         score2 = pygame.font.Font(None, 50)
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
-        # question = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
-        # question = question.render(question, (0,0,0),(255,255,255))
-        screen.fill((255, 255, 255))
+        question = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        question = question.render(current_question, (0,0,0),(255,255,255))
+        
+        # print(answer_option)
+        option_a = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_a = option_a.render(str("(A)" + " " + answer_option[0]), (255,255,255),word_color_a)
+        option_b = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_b = option_b.render(str("(B)" + " " + answer_option[1]), (255,255,255),word_color_b)
+        option_c = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_c = option_c.render(str("(C)" + " " + answer_option[2]), (255,255,255),word_color_c)
+        option_d = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_d = option_d.render(str("(D)" + " " + answer_option[3]), (255,255,255),word_color_d)
 
-        screen.blit(bg, (0,0))
+
+
         if correct == 1:
             screen.blit(correct_ans, (350, 20))
         elif correct == 2:
             screen.blit(wrong_ans, (350,20))
             
-        # if ques_ans_number == int:
-            # screen.blit(question, (100,100))
+        if type(ques_ans_number) == int:
+            screen.blit(question, (100,100))
+            screen.blit(option_a, (100,400))
+            screen.blit(option_b, (400,400))
+            screen.blit(option_c, (100,500))
+            screen.blit(option_d, (400,500))
         screen.blit(score1, (80,60))
         screen.blit(score2, (700,60))
         if ans_turn == 0:
@@ -491,9 +556,13 @@ def main():
             screen.blit(player21, (650, 20))            
         # screen.blit(txt_surface, (input_box.x+5, input_box.y+5)) 
         # Blit the input_box rect. 
-        # pygame.draw.rect(screen, color, input_box, 2) 
+        # pygame.draw.rect(screen, color, input_box, 2)
 
-        pygame.display.flip() 
+        if init_number == len(select) - 1:
+            final_result = pygame.font.Font(None, 100)
+            final_result = final_result.render(result, (0,0,255),(0,255,0))
+            screen.blit(final_result, (325,300))
+        pygame.display.flip()
         clock.tick(30) 
 
 if __name__ == '__main__': 
