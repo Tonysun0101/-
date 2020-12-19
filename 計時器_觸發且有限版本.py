@@ -12,9 +12,9 @@ def main():
     dt = 0                                      # 從timer-dt開始倒數
 
     done = False
-    while not done:                             # 判斷使用者有沒有用滑鼠把視窗關掉
-        for event in pg.event.get():            # 如果關掉了，則停止計時
-            if event.type == pg.QUIT:
+    while not done:
+        for event in pg.event.get():            # 判斷使用者有沒有用滑鼠把視窗關掉
+            if event.type == pg.QUIT:           # 如果關掉了，則停止計時
                 done = True
             elif event.type == pg.KEYDOWN:      # 如果觸發了鍵盤事件
                 if event.key == pg.K_r:         # 如果按r，則時間重置
@@ -22,13 +22,18 @@ def main():
                     timer = 10
         
         timer -= dt
+        
         if timer <= 0:
-            timer = 10                          # 時間重置
+            done = True
+            txt = font.render("BOOOOM", True, blue)
+            screen.blit(txt, (225, 100))
+            pg.display.flip()
 
         screen.fill(gray)                                       # 用灰色填滿視窗
         txt = font.render(str(round(timer, 2)), True, blue)     # 設定文字格式
         screen.blit(txt, (225, 10))                             # 文字出現的位置(我把他置頂置中，文字長度50)
         pg.display.flip()                                       # 更新上述設定到螢幕上面
-        dt = clock.tick(10) / 1000                              # 跳轉幀數
+        dt = clock.tick(800) / 1000                              # 跳轉幀數
+
 
 main()  # 叫出來
