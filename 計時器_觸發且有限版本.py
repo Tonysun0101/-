@@ -21,19 +21,20 @@ def main():
                     print("時間重置!!")
                     timer = 10
         
-        timer -= dt
+        # if 5 < timer <= 10:
+            # weight = 5
+        # elif 0 < timer <= 5:
+            # weight = 2
+        # print(weight)
         
+        timer -= dt
         if timer <= 0:
-            done = True
-            txt = font.render("BOOOOM", True, blue)
-            screen.blit(txt, (225, 100))
-            pg.display.flip()
+            break
 
         screen.fill(gray)                                       # 用灰色填滿視窗
         txt = font.render(str(round(timer, 2)), True, blue)     # 設定文字格式
         screen.blit(txt, (225, 10))                             # 文字出現的位置(我把他置頂置中，文字長度50)
         pg.display.flip()                                       # 更新上述設定到螢幕上面
-        dt = clock.tick(800) / 1000                              # 跳轉幀數
-
+        dt = clock.tick(800) / 1000                             # 跳轉幀數
 
 main()  # 叫出來

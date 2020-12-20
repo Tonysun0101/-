@@ -22,8 +22,8 @@ def main():
                     timer = 10
         
         timer -= dt
-        if timer <= 0:
-            timer = 10                          # 時間重置
+        # if timer <= 0:
+            # timer = 10                          # 時間重置
 
         screen.fill(gray)                                       # 用灰色填滿視窗
         txt = font.render(str(round(timer, 2)), True, blue)     # 設定文字格式
