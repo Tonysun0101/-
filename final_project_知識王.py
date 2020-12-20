@@ -2,6 +2,7 @@ import pygame
 import random
 import pygame.freetype
 # select = random.sample(range(0,5), 5)
+path = "C:/python/"  # 改路徑這邊改就好
 pygame.init()
 pygame.mixer.init()
 ck = pygame.display.set_mode((800,600))   #  游戏窗口
@@ -14,22 +15,22 @@ start_ck2 = start_ck2.convert()
 start_ck.fill((255,255,255))  # 白色画布1（开始界面用的）
 start_ck2.fill((255,255,255))
 # 加载各个素材图片 并且赋予变量名
-i1 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i1 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text1 = i1.render("急速列車", True, (0,0,255),(0,255,0))
 # i1 = pygame.transform.scale(i1, (200, 100))
-i11 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i11 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text11 = i11.render("急速列車", True, (0,255,255),(0,255,0))
 
-i2 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i2 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text2 = i2.render("結束遊戲", True, (0,0,255),(0,255,0))
 # i1 = pygame.transform.scale(i1, (200, 100))
-i21 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i21 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text21 = i21.render("結束遊戲", True, (0,255,255),(0,255,0))
 
-i3 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i3 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text3 = i3.render("猜猜我是誰", True, (0,0,255),(0,255,0))
 # i1 = pygame.transform.scale(i1, (200, 100))
-i31 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 100)
+i31 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text31 = i31.render("猜猜我是誰", True, (0,255,255),(0,255,0))
 
 player1 = pygame.font.Font(None, 50)
@@ -44,49 +45,48 @@ player21 = player21.render("player2", True, (0,255,255),(0,255,0))
 
 
 
-sub1 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub1 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub1 = sub1.render("運動", True, (0,0,255),(0,255,0))
-sub11 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub11 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub11 = sub11.render("運動", True, (0,255,255),(0,255,0))
 
-sub2 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub2 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub2 = sub2.render("英文", True, (0,0,255),(0,255,0))
-sub21 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub21 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub21 = sub21.render("英文", True, (0,255,255),(0,255,0))
 
-sub3 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub3 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub3 = sub3.render("地理", True, (0,0,255),(0,255,0))
-sub31 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub31 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub31 = sub31.render("地理", True, (0,255,255),(0,255,0))
 
-sub4 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub4 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub4 = sub4.render("影視", True, (0,0,255),(0,255,0))
-sub41 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub41 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub41 = sub41.render("影視", True, (0,255,255),(0,255,0))
 
-sub5 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub5 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub5 = sub5.render("主題5", True, (0,0,255),(0,255,0))
-sub51 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub51 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub51 = sub51.render("主題5", True, (0,255,255),(0,255,0))
 
-sub6 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub6 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub6 = sub6.render("主題6", True, (0,0,255),(0,255,0))
-sub61 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+sub61 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub61 = sub61.render("主題6", True, (0,255,255),(0,255,0))
 
 
-bg = pygame.image.load('C:/python/galaxy-dark-matter.jpg')
+bg = pygame.image.load(path + 'galaxy-dark-matter.jpg')
 bg.convert()
 
 # 音效部分
-pygame.mixer.music.load("C:/python/超級比一比.wav")  # 背景音樂
+pygame.mixer.music.load(path + "超級比一比.wav")  # 背景音樂
 
-correct_sound = pygame.mixer.Sound("C:/python/答對音效.ogg")  # 答對音效
+correct_sound = pygame.mixer.Sound(path + "答對音效.ogg")  # 答對音效
 correct_sound.set_volume(0.2)
-wrong_sound = pygame.mixer.Sound("C:/python/答錯音效.ogg")  # 錯誤音效
+wrong_sound = pygame.mixer.Sound(path + "答錯音效.ogg")  # 錯誤音效
 wrong_sound.set_volume(0.2)
-bird_sound = pygame.mixer.Sound("C:/Users/USER/Downloads/音效.ogg")
-bird_sound.set_volume(0.2)
+
 
 # 題庫部分
 ques1_list = list()  # 題目list
@@ -107,17 +107,17 @@ ans5_list = list()  # 答案雙層list
 ques6_list = list()  # 題目list
 ans6_list = list()  # 答案雙層list
 
-sub_question1 = open("C:/python/運動題目.txt", 'r', encoding = 'utf-8')
-sub_answer1 = open("C:/python/運動答案.txt", 'r', encoding = 'utf-8')
+sub_question1 = open(path + "運動題目.txt", 'r', encoding = 'utf-8')
+sub_answer1 = open(path + "運動答案.txt", 'r', encoding = 'utf-8')
 
-sub_question2 = open("C:/python/英文主題題目.txt", 'r', encoding = 'utf-8')
-sub_answer2 = open("C:/python/英文主題答案.txt", 'r', encoding = 'utf-8')
+sub_question2 = open(path + "英文主題題目.txt", 'r', encoding = 'utf-8')
+sub_answer2 = open(path + "英文主題答案.txt", 'r', encoding = 'utf-8')
 
-sub_question3 = open("C:/python/地理題目.txt", 'r', encoding = 'utf-8')
-sub_answer3 = open("C:/python/地理答案.txt", 'r', encoding = 'utf-8')
+sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
+sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 
-sub_question4 = open("C:/python/影視題目.txt", 'r', encoding = 'utf-8')
-sub_answer4 = open("C:/python/影視答案.txt", 'r', encoding = 'utf-8')
+sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
+sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
 for a_ques1 in sub_question1:
     a_ques1 = a_ques1.strip("\n")
     ques1_list.append(a_ques1)
@@ -402,7 +402,7 @@ def word_wrap(surf, text, font1, color=(255, 255, 255)):
         x += bounds.width + space.width
     return x, y
 
-font1 = pygame.freetype.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
 
 
 def main(): 
@@ -413,9 +413,9 @@ def main():
     done = False 
     init_score1 = 0
     init_score2 = 0
-    correct_ans = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+    correct_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
     correct_ans = correct_ans.render("correct", True, (0,0,255),(0,255,0))
-    wrong_ans = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
+    wrong_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
     wrong_ans = wrong_ans.render("wrong", True, (0,0,255),(0,255,0))
     correct = 0
     ans_turn = 0
@@ -581,13 +581,13 @@ def main():
         word_wrap(screen, ques_list[select[init_number]], font1)
         
         # print(answer_option)
-        option_a = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_a = option_a.render(str("(A)" + " " + answer_option[0]), (255,255,255),word_color_a)
-        option_b = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_b = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_b = option_b.render(str("(B)" + " " + answer_option[1]), (255,255,255),word_color_b)
-        option_c = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_c = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_c = option_c.render(str("(C)" + " " + answer_option[2]), (255,255,255),word_color_c)
-        option_d = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+        option_d = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_d = option_d.render(str("(D)" + " " + answer_option[3]), (255,255,255),word_color_d)
 
 
