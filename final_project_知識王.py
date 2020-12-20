@@ -2,13 +2,15 @@ import pygame
 import random
 import pygame.freetype
 
-path = "C://Users//Admin//Desktop//final_project//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
+path = "C://Users//Admin//Desktop//PBC_Final_Project//-//圖片聲音字型//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
 
-pygame.init()
-pygame.mixer.init()
-ck = pygame.display.set_mode((800,600))   #  游戏窗口
-pygame.display.set_caption("選擇遊戲")    #  给窗口取个名 我小时候喜欢双截龙和拳皇
-clock = pygame.time.Clock()                         #  游戏刷新速度（我个人这么理解）
+pygame.init()           # 畫面初始化
+pygame.mixer.init()     # 聲音初始化
+ck = pygame.display.set_mode((800,600))     # 遊戲視窗大小
+
+pygame.display.set_caption("選擇遊戲")      # 我不知道這行是幹嘛的，刪掉好像沒影響
+
+clock = pygame.time.Clock()                 # 時鐘套件
 start_ck = pygame.Surface(ck.get_size())    #   充当开始界面的画布
 start_ck2 = pygame.Surface(ck.get_size())  #  充当第一关的画布界面暂时占位（可以理解为游戏开始了）
 start_ck = start_ck.convert()
@@ -77,7 +79,7 @@ sub61 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub61 = sub61.render("主題6", True, (0,255,255),(0,255,0))
 
 
-bg = pygame.image.load(path + '1608186194606.jpg')
+bg = pygame.image.load(path + '貓貓.jpg')
 bg.convert()
 
 # 音效部分
