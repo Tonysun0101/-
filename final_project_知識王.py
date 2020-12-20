@@ -409,12 +409,7 @@ def main():
     screen = pygame.display.set_mode((800, 600)) 
     font = pygame.font.Font(None, 32) 
     clock = pygame.time.Clock() 
-    # input_box = pygame.Rect(310, 50, 200, 32) 
-    # color_inactive = pygame.Color('lightskyblue3') 
-    # color_active = pygame.Color('red2') 
-    # color = color_inactive 
-    # active = False 
-    # text = '' 
+ 
     done = False 
     init_score1 = 0
     init_score2 = 0
