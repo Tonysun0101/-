@@ -1,5 +1,6 @@
 import pygame
 import random
+import pygame.freetype
 # select = random.sample(range(0,5), 5)
 pygame.init()
 pygame.mixer.init()
@@ -44,24 +45,24 @@ player21 = player21.render("player2", True, (0,255,255),(0,255,0))
 
 
 sub1 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub1 = sub1.render("主題1", True, (0,0,255),(0,255,0))
+sub1 = sub1.render("運動", True, (0,0,255),(0,255,0))
 sub11 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub11 = sub11.render("主題1", True, (0,255,255),(0,255,0))
+sub11 = sub11.render("運動", True, (0,255,255),(0,255,0))
 
 sub2 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub2 = sub2.render("主題2", True, (0,0,255),(0,255,0))
+sub2 = sub2.render("英文", True, (0,0,255),(0,255,0))
 sub21 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub21 = sub21.render("主題2", True, (0,255,255),(0,255,0))
+sub21 = sub21.render("英文", True, (0,255,255),(0,255,0))
 
 sub3 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub3 = sub3.render("主題3", True, (0,0,255),(0,255,0))
+sub3 = sub3.render("地理", True, (0,0,255),(0,255,0))
 sub31 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub31 = sub31.render("主題3", True, (0,255,255),(0,255,0))
+sub31 = sub31.render("地理", True, (0,255,255),(0,255,0))
 
 sub4 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub4 = sub4.render("主題4", True, (0,0,255),(0,255,0))
+sub4 = sub4.render("影視", True, (0,0,255),(0,255,0))
 sub41 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
-sub41 = sub41.render("主題4", True, (0,255,255),(0,255,0))
+sub41 = sub41.render("影視", True, (0,255,255),(0,255,0))
 
 sub5 = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 50)
 sub5 = sub5.render("主題5", True, (0,0,255),(0,255,0))
@@ -78,7 +79,7 @@ bg = pygame.image.load('C:/python/galaxy-dark-matter.jpg')
 bg.convert()
 
 # 音效部分
-# background_music = pygame.mixer.music()  # 背景音樂
+pygame.mixer.music.load("C:/python/超級比一比.wav")  # 背景音樂
 
 correct_sound = pygame.mixer.Sound("C:/python/答對音效.ogg")  # 答對音效
 correct_sound.set_volume(0.2)
@@ -106,22 +107,60 @@ ans5_list = list()  # 答案雙層list
 ques6_list = list()  # 題目list
 ans6_list = list()  # 答案雙層list
 
-sub_question1 = open("C:/python/NBA題目.txt", 'r', encoding = 'utf-8')
-sub_answer1 = open("C:/python/NBA選項.txt", 'r', encoding = 'utf-8')
+sub_question1 = open("C:/python/運動題目.txt", 'r', encoding = 'utf-8')
+sub_answer1 = open("C:/python/運動答案.txt", 'r', encoding = 'utf-8')
+
+sub_question2 = open("C:/python/英文主題題目.txt", 'r', encoding = 'utf-8')
+sub_answer2 = open("C:/python/英文主題答案.txt", 'r', encoding = 'utf-8')
+
+sub_question3 = open("C:/python/地理題目.txt", 'r', encoding = 'utf-8')
+sub_answer3 = open("C:/python/地理答案.txt", 'r', encoding = 'utf-8')
+
+sub_question4 = open("C:/python/影視題目.txt", 'r', encoding = 'utf-8')
+sub_answer4 = open("C:/python/影視答案.txt", 'r', encoding = 'utf-8')
 for a_ques1 in sub_question1:
     a_ques1 = a_ques1.strip("\n")
     ques1_list.append(a_ques1)
 
 for a_ans1 in sub_answer1:
     a_ans1 = a_ans1.strip("\n")
-    a_ans_list1 = a_ans1.split(" ")
+    a_ans_list1 = a_ans1.split(";")
     ans1_list.append(a_ans_list1)
 
+for a_ques2 in sub_question2:
+    a_ques2 = a_ques2.strip("\n")
+    ques2_list.append(a_ques2)
+
+for a_ans2 in sub_answer2:
+    a_ans2 = a_ans2.strip("\n")
+    a_ans_list2 = a_ans2.split(";")
+    ans2_list.append(a_ans_list2)
+
+for a_ques3 in sub_question3:
+    a_ques3 = a_ques3.strip("\n")
+    ques3_list.append(a_ques3)
+
+for a_ans3 in sub_answer3:
+    a_ans3 = a_ans3.strip("\n")
+    a_ans_list3 = a_ans3.split(";")
+    ans3_list.append(a_ans_list3)
+    
+for a_ques4 in sub_question4:
+    a_ques4 = a_ques4.strip("\n")
+    ques4_list.append(a_ques4)
+
+for a_ans4 in sub_answer4:
+    a_ans4 = a_ans4.strip("\n")
+    a_ans_list4 = a_ans4.split(";")
+    ans4_list.append(a_ans_list4)
 print(ques1_list)
 print(ans1_list)
-    
 
+print(ques2_list)
+print(ans2_list)
 
+print(ques3_list)
+print(ans3_list)
 
 #  以下为选择开始界面鼠标检测结构。
 n1 = True
@@ -208,8 +247,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques2_list  激活主題2題庫
-            # ans_list = ans2_list  激活主題2解答
+            ques_list = ques2_list  # 激活主題2題庫
+            ans_list = ans2_list  # 激活主題2解答
     elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -220,8 +259,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques3_list  激活主題3題庫
-            # ans_list = ans3_list  激活主題3解答
+            ques_list = ques3_list  # 激活主題3題庫
+            ans_list = ans3_list  # 激活主題3解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -232,8 +271,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques4_list  激活主題4題庫
-            # ans_list = ans4_list  激活主題4解答
+            ques_list = ques4_list  # 激活主題4題庫
+            ans_list = ans4_list  # 激活主題4解答
     elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -282,7 +321,7 @@ while n2:
 
             # exit() 直接终止当前正在执行的程序
             exit()
-select = random.sample(range(0,len(ques1_list)-1), 5)
+select = random.sample(range(0,len(ques1_list)-1), 10)
 print(select)
 
 if back is True:
@@ -343,6 +382,29 @@ if back is True:
 
 
 pygame.display.set_caption("知識王")
+
+def word_wrap(surf, text, font1, color=(255, 255, 255)):
+    font1.origin = True
+    words = text
+    width, height = (600,500)
+    line_spacing = font1.get_sized_height() + 2
+    x, y = 200, 50
+    space = font1.get_rect(' ')
+    for word in words:
+        bounds = font1.get_rect(word)
+        if x + bounds.width + bounds.x >= width:
+            x, y = 200, y + line_spacing
+        if x + bounds.width + bounds.x >= width:
+            raise ValueError("word too wide for the surface")
+        if y + bounds.height - bounds.y >= height:
+            raise ValueError("text to long for the surface")
+        font1.render_to(surf, (x, y), None, color)
+        x += bounds.width + space.width
+    return x, y
+
+font1 = pygame.freetype.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
+
+
 def main(): 
     screen = pygame.display.set_mode((800, 600)) 
     font = pygame.font.Font(None, 32) 
@@ -369,11 +431,14 @@ def main():
     word_color_c = (255,255,255)
     word_color_d = (255,255,255)
     result = ""
+    pygame.mixer.music.play(-1)
     while not done:
+        
         ques_ans_number = select[init_number]  # 第一題 list中的第一項
         current_question = ques_list[ques_ans_number]
         answer_option = ans_list[ques_ans_number]
         correct_answer = ans_list[ques_ans_number][4]
+        # print(current_question)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True 
@@ -384,12 +449,12 @@ def main():
                         ans_turn = 1  
                         print(ans_turn)
                         shift_avail = False
-                        # background_music.stop()
+                        pygame.mixer.music.pause()
                     if event.key == pygame.K_RSHIFT:
                         ans_turn = 2  
                         print(ans_turn)
                         shift_avail = False
-                        # background_music.stop()
+                        pygame.mixer.music.pause()
 
                 if event.key == pygame.K_a:
                     answer = answer_option[0]
@@ -484,13 +549,14 @@ def main():
                         correct = 2
                         wrong_sound.play()
                 elif event.key == pygame.K_RETURN:
+                    pygame.mixer.music.unpause()
                     word_color_a = (255,255,255)
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
                     ans_turn = 0
                     shift_avail = True
-                    # background_music.play()
+                    
                     if init_number == len(select) - 1:
                         if init_score1 > init_score2:
                             result = "P1 win"
@@ -517,8 +583,7 @@ def main():
         score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))
         score2 = pygame.font.Font(None, 50)
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
-        question = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
-        question = question.render(current_question, (0,0,0),(255,255,255))
+        word_wrap(screen, ques_list[select[init_number]], font1)
         
         # print(answer_option)
         option_a = pygame.font.Font("C:/python/NotoSansMonoCJKtc-Bold.otf", 32)
@@ -538,7 +603,6 @@ def main():
             screen.blit(wrong_ans, (350,20))
             
         if type(ques_ans_number) == int:
-            screen.blit(question, (100,100))
             screen.blit(option_a, (100,400))
             screen.blit(option_b, (400,400))
             screen.blit(option_c, (100,500))
