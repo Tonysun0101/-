@@ -1,8 +1,9 @@
 import pygame
 import random
 import pygame.freetype
-# select = random.sample(range(0,5), 5)
-path = "C:/python/"  # 改路徑這邊改就好
+
+path = "C://Users//Admin//Desktop//final_project//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
+
 pygame.init()
 pygame.mixer.init()
 ck = pygame.display.set_mode((800,600))   #  游戏窗口
@@ -76,7 +77,7 @@ sub61 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
 sub61 = sub61.render("主題6", True, (0,255,255),(0,255,0))
 
 
-bg = pygame.image.load(path + 'galaxy-dark-matter.jpg')
+bg = pygame.image.load(path + '1608186194606.jpg')
 bg.convert()
 
 # 音效部分
