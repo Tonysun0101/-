@@ -1,6 +1,7 @@
 import pygame
 import random
 import pygame.freetype
+import time
 
 path = "C://Users//Admin//Desktop//PBC_Final_Project//-//圖片聲音字型//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
 
@@ -19,10 +20,10 @@ start_ck.fill((255,255,255))  # 白色画布1（开始界面用的）
 start_ck2.fill((255,255,255))
 # 加载各个素材图片 并且赋予变量名
 i1 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text1 = i1.render("急速列車", True, (0,0,255),(0,255,0))
+text1 = i1.render("進入遊戲", True, (0,0,255),(0,255,0))
 # i1 = pygame.transform.scale(i1, (200, 100))
 i11 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text11 = i11.render("急速列車", True, (0,255,255),(0,255,0))
+text11 = i11.render("進入遊戲", True, (0,255,255),(0,255,0))
 
 i2 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text2 = i2.render("結束遊戲", True, (0,0,255),(0,255,0))
@@ -31,10 +32,10 @@ i21 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
 text21 = i21.render("結束遊戲", True, (0,255,255),(0,255,0))
 
 i3 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text3 = i3.render("猜猜我是誰", True, (0,0,255),(0,255,0))
+text3 = i3.render("遊戲說明", True, (0,0,255),(0,255,0))
 # i1 = pygame.transform.scale(i1, (200, 100))
 i31 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text31 = i31.render("猜猜我是誰", True, (0,255,255),(0,255,0))
+text31 = i31.render("遊戲說明", True, (0,255,255),(0,255,0))
 
 player1 = pygame.font.Font(None, 50)
 player1 = player1.render("player1", True, (0,0,255),(0,255,0))
@@ -92,22 +93,22 @@ wrong_sound.set_volume(0.2)
 
 
 # 題庫部分
-ques1_list = list()  # 題目list
+ques1_list = list() # 題目list
 ans1_list = list()  # 答案雙層list 總共5項 前4個是選項 最後一個是數字代表正確答案是哪個選項
 
-ques2_list = list()  # 題目list
+ques2_list = list() # 題目list
 ans2_list = list()  # 答案雙層list
 
-ques3_list = list()  # 題目list
+ques3_list = list() # 題目list
 ans3_list = list()  # 答案雙層list
 
-ques4_list = list()  # 題目list
+ques4_list = list() # 題目list
 ans4_list = list()  # 答案雙層list
 
-ques5_list = list()  # 題目list
+ques5_list = list() # 題目list
 ans5_list = list()  # 答案雙層list
 
-ques6_list = list()  # 題目list
+ques6_list = list() # 題目list
 ans6_list = list()  # 答案雙層list
 
 sub_question1 = open(path + "運動題目.txt", 'r', encoding = 'utf-8')
@@ -121,6 +122,7 @@ sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
+
 for a_ques1 in sub_question1:
     a_ques1 = a_ques1.strip("\n")
     ques1_list.append(a_ques1)
@@ -156,14 +158,14 @@ for a_ans4 in sub_answer4:
     a_ans4 = a_ans4.strip("\n")
     a_ans_list4 = a_ans4.split(";")
     ans4_list.append(a_ans_list4)
-print(ques1_list)
-print(ans1_list)
+# print(ques1_list)
+# print(ans1_list)
 
-print(ques2_list)
-print(ans2_list)
+# print(ques2_list)
+# print(ans2_list)
 
-print(ques3_list)
-print(ans3_list)
+# print(ques3_list)
+# print(ans3_list)
 
 #  以下为选择开始界面鼠标检测结构。
 n1 = True
@@ -172,7 +174,7 @@ while n1:
     buttons = pygame.mouse.get_pressed()
     x1, y1 = pygame.mouse.get_pos()
     start_ck.blit(bg, (0,0))
-    if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
+    if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
         start_ck.blit(text11, (200, 100))
         start_ck.blit(text2, (200, 250))
         start_ck.blit(text3, (200, 400))
@@ -201,6 +203,7 @@ while n1:
     pygame.display.update()
 
 
+
     # 下面是监听退出动作
 
     # 监听事件
@@ -208,7 +211,7 @@ while n1:
 
         # 判断事件类型是否是退出事件
         if event.type == pygame.QUIT:
-            print("游戏退出...")
+            print("遊戲退出...")
 
             # quit 卸载所有的模块
             pygame.quit()
@@ -317,7 +320,7 @@ while n2:
                 n2 = False
                 back = True
         elif event.type == pygame.QUIT:
-            print("游戏退出...")
+            print("遊戲退出...")
 
             # quit 卸载所有的模块
             pygame.quit()
@@ -325,7 +328,7 @@ while n2:
             # exit() 直接终止当前正在执行的程序
             exit()
 select = random.sample(range(0,len(ques1_list)-1), 10)
-print(select)
+# print(select)
 
 if back is True:
     pygame.display.set_caption("選擇遊戲")
@@ -405,13 +408,41 @@ def word_wrap(surf, text, font1, color=(255, 255, 255)):
         x += bounds.width + space.width
     return x, y
 
+def timer_wrap(surf, text, font1, color=(255, 255, 255)):
+    font1.origin = True
+    words = text
+    width, height = (600,500)
+    line_spacing = font1.get_sized_height() + 2
+    x, y = 400, 350
+    space = font1.get_rect(' ')
+    for word in words:
+        bounds = font1.get_rect(word)
+        if x + bounds.width + bounds.x >= width:
+            x, y = 200, y + line_spacing
+        if x + bounds.width + bounds.x >= width:
+            raise ValueError("word too wide for the surface")
+        if y + bounds.height - bounds.y >= height:
+            raise ValueError("text to long for the surface")
+        font1.render_to(surf, (x, y), None, color)
+        x += bounds.width + space.width
+    return x, y
+
 font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
 
+# clock = pg.time.Clock()
+# timer = 10
+# dt = 0
 
 def main(): 
-    screen = pygame.display.set_mode((800, 600)) 
+    screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 32) 
     clock = pygame.time.Clock() 
+    # blue = pygame.Color('dodgerblue')
+    # font = pygame.font.Font(None, 50)
+    # timer = 10
+    # txt = font.render(str(round(timer, 2)), True, blue)
+    # screen.blit(txt, (225, 10))
+    # pygame.display.flip()
  
     done = False 
     init_score1 = 0
@@ -436,34 +467,36 @@ def main():
         current_question = ques_list[ques_ans_number]
         answer_option = ans_list[ques_ans_number]
         correct_answer = ans_list[ques_ans_number][4]
+        
         # print(current_question)
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 done = True 
 
             if event.type == pygame.KEYDOWN:
+                
                 if shift_avail == True:
                     if event.key == pygame.K_LSHIFT:
                         ans_turn = 1  
-                        print(ans_turn)
                         shift_avail = False
                         pygame.mixer.music.pause()
+                        
                     if event.key == pygame.K_RSHIFT:
                         ans_turn = 2  
-                        print(ans_turn)
                         shift_avail = False
                         pygame.mixer.music.pause()
 
                 if event.key == pygame.K_a:
-                    answer = answer_option[0]
+                    answer = answer_option[0]   # 按a代表選了第0個選項
                     word_color_a = (255,0,0)
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
                     if answer == correct_answer:
-                        if ans_turn == 1:
+                        if ans_turn == 1:       # 輪到一號回答，且回答正確，一號加分!
                             init_score1 += 2
-                        elif ans_turn == 2:
+                        elif ans_turn == 2:     # 輪到二號回答，且回答正確，二號加分!
                             init_score2 += 2
                         ans_turn = 0
                         correct = 1
@@ -471,10 +504,10 @@ def main():
                     else:
                         if ans_turn == 1:
                             init_score1 -= 1
-                            ans_turn = 2
+                            ans_turn = 2        # 一號答錯了，失去此輪回答機會，換二號回答
                         elif ans_turn == 2:
                             init_score2 -= 1
-                            ans_turn = 1
+                            ans_turn = 1        # 二號答錯了，失去此輪回答機會，換一號回答
                         correct = 2
                         wrong_sound.play()
                 elif event.key == pygame.K_b:
@@ -582,6 +615,10 @@ def main():
         score2 = pygame.font.Font(None, 50)
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
         word_wrap(screen, ques_list[select[init_number]], font1)
+        
+        global timer
+        timer = 10
+        timer_wrap(screen, int(timer), font1)
         
         # print(answer_option)
         option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
