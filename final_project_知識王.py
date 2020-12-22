@@ -5,82 +5,50 @@ import time
 
 path = "C://Users//Admin//Desktop//PBC_Final_Project//-//圖片聲音字型//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
 
-pygame.init()           # 畫面初始化
-pygame.mixer.init()     # 聲音初始化
+pygame.init()                               # 畫面初始化
+pygame.mixer.init()                         # 聲音初始化
 ck = pygame.display.set_mode((800,600))     # 遊戲視窗大小
 
-pygame.display.set_caption("選擇遊戲")      # 我不知道這行是幹嘛的，刪掉好像沒影響
+pygame.display.set_caption("選擇遊戲")      # 遊戲視窗的名稱
 
 clock = pygame.time.Clock()                 # 時鐘套件
-start_ck = pygame.Surface(ck.get_size())    #   充当开始界面的画布
-start_ck2 = pygame.Surface(ck.get_size())  #  充当第一关的画布界面暂时占位（可以理解为游戏开始了）
-start_ck = start_ck.convert()
+start_ck = pygame.Surface(ck.get_size())    # get_size()取得視窗尺寸，並建立一個畫布
+start_ck2 = pygame.Surface(ck.get_size())   # 充當第一關的畫布介面暫時佔位(可以理解為遊戲開始了)
+start_ck = start_ck.convert()               # convert()建立副本，加快畫布在視窗顯示速度
 start_ck2 = start_ck2.convert()
-start_ck.fill((255,255,255))  # 白色画布1（开始界面用的）
-start_ck2.fill((255,255,255))
-# 加载各个素材图片 并且赋予变量名
-i1 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text1 = i1.render("進入遊戲", True, (0,0,255),(0,255,0))
-# i1 = pygame.transform.scale(i1, (200, 100))
-i11 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text11 = i11.render("進入遊戲", True, (0,255,255),(0,255,0))
+start_ck.fill((255,255,255))                # 白色畫布1(開始介面用的)
+start_ck2.fill((255,255,255))               # 白色畫布2(第一關遊戲介面用的)
 
-i2 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text2 = i2.render("結束遊戲", True, (0,0,255),(0,255,0))
-# i1 = pygame.transform.scale(i1, (200, 100))
-i21 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text21 = i21.render("結束遊戲", True, (0,255,255),(0,255,0))
+# 載入所需的素材字型圖片顏色等等，並幫他們命名
+start_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)         # 設定開始介面的統一字型，給他一個名稱
+start_font_1 = start_font.render("進入遊戲", True, (0, 0, 255), (0, 255, 0))    # 給三個選項各兩種顏色
+start_font_11 = start_font.render("進入遊戲", True, (0,255,255),(0,255,0))      # (滑鼠游標放上去和沒放上去的兩種顏色)
+start_font_2 = start_font.render("結束遊戲", True, (0,0,255),(0,255,0))
+start_font_21 = start_font.render("結束遊戲", True, (0,255,255),(0,255,0))
+start_font_3 = start_font.render("遊戲說明", True, (0,0,255),(0,255,0))
+start_font_31 = start_font.render("遊戲說明", True, (0,255,255),(0,255,0))
 
-i3 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text3 = i3.render("遊戲說明", True, (0,0,255),(0,255,0))
-# i1 = pygame.transform.scale(i1, (200, 100))
-i31 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)
-text31 = i31.render("遊戲說明", True, (0,255,255),(0,255,0))
+player_font = pygame.font.Font(None, 50)                                    # 玩家按Shift搶答後顏色的改變
+player1 = player_font.render("player1", True, (0,0,255),(0,255,0))          # 一樣分成兩種顏色
+player11 = player_font.render("player1", True, (0,255,255),(0,255,0))       # 先幫這兩種顏色取變數名稱
+player2 = player_font.render("player2", True, (0,0,255),(0,255,0))          # 1、2代表還沒按
+player21 = player_font.render("player2", True, (0,255,255),(0,255,0))       # 11、21代表已經按了
 
-player1 = pygame.font.Font(None, 50)
-player1 = player1.render("player1", True, (0,0,255),(0,255,0))
-player11 = pygame.font.Font(None, 50)
-player11 = player11.render("player1", True, (0,255,255),(0,255,0))
+sub_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)        # 遊戲選單游標在上面與否的顏色
+sub1 = sub_font.render("運動", True, (0,0,255),(0,255,0))
+sub11 = sub_font.render("運動", True, (0,255,255),(0,255,0))
+sub2 = sub_font.render("英文", True, (0,0,255),(0,255,0))
+sub21 = sub_font.render("英文", True, (0,255,255),(0,255,0))
+sub3 = sub_font.render("地理", True, (0,0,255),(0,255,0))
+sub31 = sub_font.render("地理", True, (0,255,255),(0,255,0))
+sub4 = sub_font.render("影視", True, (0,0,255),(0,255,0))
+sub41 = sub_font.render("影視", True, (0,255,255),(0,255,0))
+sub5 = sub_font.render("主題5", True, (0,0,255),(0,255,0))
+sub51 = sub_font.render("主題5", True, (0,255,255),(0,255,0))
+sub6 = sub_font.render("主題6", True, (0,0,255),(0,255,0))
+sub61 = sub_font.render("主題6", True, (0,255,255),(0,255,0))
 
-player2 = pygame.font.Font(None, 50)
-player2 = player2.render("player2", True, (0,0,255),(0,255,0))
-player21 = pygame.font.Font(None, 50)
-player21 = player21.render("player2", True, (0,255,255),(0,255,0))
-
-
-
-sub1 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub1 = sub1.render("運動", True, (0,0,255),(0,255,0))
-sub11 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub11 = sub11.render("運動", True, (0,255,255),(0,255,0))
-
-sub2 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub2 = sub2.render("英文", True, (0,0,255),(0,255,0))
-sub21 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub21 = sub21.render("英文", True, (0,255,255),(0,255,0))
-
-sub3 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub3 = sub3.render("地理", True, (0,0,255),(0,255,0))
-sub31 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub31 = sub31.render("地理", True, (0,255,255),(0,255,0))
-
-sub4 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub4 = sub4.render("影視", True, (0,0,255),(0,255,0))
-sub41 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub41 = sub41.render("影視", True, (0,255,255),(0,255,0))
-
-sub5 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub5 = sub5.render("主題5", True, (0,0,255),(0,255,0))
-sub51 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub51 = sub51.render("主題5", True, (0,255,255),(0,255,0))
-
-sub6 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub6 = sub6.render("主題6", True, (0,0,255),(0,255,0))
-sub61 = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
-sub61 = sub61.render("主題6", True, (0,255,255),(0,255,0))
-
-
-bg = pygame.image.load(path + '貓貓.jpg')
+bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
 bg.convert()
 
 # 音效部分
@@ -95,39 +63,30 @@ wrong_sound.set_volume(0.2)
 # 題庫部分
 ques1_list = list() # 題目list
 ans1_list = list()  # 答案雙層list 總共5項 前4個是選項 最後一個是數字代表正確答案是哪個選項
-
 ques2_list = list() # 題目list
 ans2_list = list()  # 答案雙層list
-
 ques3_list = list() # 題目list
 ans3_list = list()  # 答案雙層list
-
 ques4_list = list() # 題目list
 ans4_list = list()  # 答案雙層list
-
 ques5_list = list() # 題目list
 ans5_list = list()  # 答案雙層list
-
 ques6_list = list() # 題目list
 ans6_list = list()  # 答案雙層list
 
-sub_question1 = open(path + "運動題目.txt", 'r', encoding = 'utf-8')
+sub_question1 = open(path + "運動題目.txt", 'r', encoding = 'utf-8')        # 把題庫們打開
 sub_answer1 = open(path + "運動答案.txt", 'r', encoding = 'utf-8')
-
 sub_question2 = open(path + "英文主題題目.txt", 'r', encoding = 'utf-8')
 sub_answer2 = open(path + "英文主題答案.txt", 'r', encoding = 'utf-8')
-
 sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
 sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
-
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
 
-for a_ques1 in sub_question1:
+for a_ques1 in sub_question1:           # 把題庫們裝進清單裡面
     a_ques1 = a_ques1.strip("\n")
     ques1_list.append(a_ques1)
-
-for a_ans1 in sub_answer1:
+for a_ans1 in sub_answer1:              # 答案部分則是用雙層清單，正確的選項是第五個
     a_ans1 = a_ans1.strip("\n")
     a_ans_list1 = a_ans1.split(";")
     ans1_list.append(a_ans_list1)
@@ -135,7 +94,6 @@ for a_ans1 in sub_answer1:
 for a_ques2 in sub_question2:
     a_ques2 = a_ques2.strip("\n")
     ques2_list.append(a_ques2)
-
 for a_ans2 in sub_answer2:
     a_ans2 = a_ans2.strip("\n")
     a_ans_list2 = a_ans2.split(";")
@@ -144,7 +102,6 @@ for a_ans2 in sub_answer2:
 for a_ques3 in sub_question3:
     a_ques3 = a_ques3.strip("\n")
     ques3_list.append(a_ques3)
-
 for a_ans3 in sub_answer3:
     a_ans3 = a_ans3.strip("\n")
     a_ans_list3 = a_ans3.split(";")
@@ -153,64 +110,47 @@ for a_ans3 in sub_answer3:
 for a_ques4 in sub_question4:
     a_ques4 = a_ques4.strip("\n")
     ques4_list.append(a_ques4)
-
 for a_ans4 in sub_answer4:
     a_ans4 = a_ans4.strip("\n")
     a_ans_list4 = a_ans4.split(";")
     ans4_list.append(a_ans_list4)
-# print(ques1_list)
-# print(ans1_list)
 
-# print(ques2_list)
-# print(ans2_list)
 
-# print(ques3_list)
-# print(ans3_list)
-
-#  以下为选择开始界面鼠标检测结构。
+# 選擇我要開始?結束?還是遊戲說明
 n1 = True
 while n1:
     clock.tick(30)
-    buttons = pygame.mouse.get_pressed()
-    x1, y1 = pygame.mouse.get_pos()
+    buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
+    x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
     start_ck.blit(bg, (0,0))
     if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
-        start_ck.blit(text11, (200, 100))
-        start_ck.blit(text2, (200, 250))
-        start_ck.blit(text3, (200, 400))
-        if buttons[0]:
-            n1 = False
-
+        start_ck.blit(start_font_11, (200, 100))
+        start_ck.blit(start_font_2, (200, 250))
+        start_ck.blit(start_font_3, (200, 400))
+        if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
+            n1 = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
     elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
-        start_ck.blit(text21, (200, 250))
-        start_ck.blit(text1, (200, 100))
-        start_ck.blit(text3, (200, 400))
-        if buttons[0]:
-            pygame.quit()
+        start_ck.blit(start_font_21, (200, 250))
+        start_ck.blit(start_font_1, (200, 100))
+        start_ck.blit(start_font_3, (200, 400))
+        if buttons[0]:          # 在退出遊戲選項點選滑鼠左鍵
+            pygame.quit()       # 我要退出遊戲，整個pygame關閉
             exit()
 
-    elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:
-        start_ck.blit(text31, (200, 400))
-        start_ck.blit(text1, (200, 100))
-        start_ck.blit(text2, (200, 250))
+    elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:    # 遊戲說明畫面
+        start_ck.blit(start_font_31, (200, 400))
+        start_ck.blit(start_font_1, (200, 100))
+        start_ck.blit(start_font_2, (200, 250))
     else:
-        start_ck.blit(text1, (200, 100))
-        start_ck.blit(text2, (200, 250))
-        start_ck.blit(text3, (200, 400))
-
+        start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
+        start_ck.blit(start_font_2, (200, 250))
+        start_ck.blit(start_font_3, (200, 400))
 
     ck.blit(start_ck,(0,0))
     pygame.display.update()
 
-
-
-    # 下面是监听退出动作
-
-    # 监听事件
-    for event in pygame.event.get():
-
-        # 判断事件类型是否是退出事件
-        if event.type == pygame.QUIT:
+    for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
+        if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
             print("遊戲退出...")
 
             # quit 卸载所有的模块
@@ -339,28 +279,28 @@ if back is True:
         x1, y1 = pygame.mouse.get_pos()
         start_ck.blit(bg, (0,0))
         if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
-            start_ck.blit(text11, (200, 100))
-            start_ck.blit(text2, (200, 250))
-            start_ck.blit(text3, (200, 400))
+            start_ck.blit(start_font_11, (200, 100))
+            start_ck.blit(start_font_2, (200, 250))
+            start_ck.blit(start_font_3, (200, 400))
             if buttons[0]:
                 n1 = False
 
         elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
-            start_ck.blit(text21, (200, 250))
-            start_ck.blit(text1, (200, 100))
-            start_ck.blit(text3, (200, 400))
+            start_ck.blit(start_font_21, (200, 250))
+            start_ck.blit(start_font_1, (200, 100))
+            start_ck.blit(start_font_3, (200, 400))
             if buttons[0]:
                 pygame.quit()
                 exit()
 
         elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:
-            start_ck.blit(text31, (200, 400))
-            start_ck.blit(text1, (200, 100))
-            start_ck.blit(text2, (200, 250))
+            start_ck.blit(start_font_31, (200, 400))
+            start_ck.blit(start_font_1, (200, 100))
+            start_ck.blit(start_font_2, (200, 250))
         else:
-            start_ck.blit(text1, (200, 100))
-            start_ck.blit(text2, (200, 250))
-            start_ck.blit(text3, (200, 400))
+            start_ck.blit(start_font_1, (200, 100))
+            start_ck.blit(start_font_2, (200, 250))
+            start_ck.blit(start_font_3, (200, 400))
 
 
         ck.blit(start_ck,(0,0))
@@ -374,7 +314,7 @@ if back is True:
 
             # 判断事件类型是否是退出事件
             if event.type == pygame.QUIT:
-                print("游戏退出...")
+                print("遊戲退出...")
 
                 # quit 卸载所有的模块
                 pygame.quit()
@@ -462,7 +402,7 @@ def main():
     result = ""
     pygame.mixer.music.play(-1)
     while not done:
-        
+        # print(1)
         ques_ans_number = select[init_number]  # 第一題 list中的第一項
         current_question = ques_list[ques_ans_number]
         answer_option = ans_list[ques_ans_number]
@@ -475,13 +415,13 @@ def main():
                 done = True 
 
             if event.type == pygame.KEYDOWN:
-                
+                # print("keydown")
                 if shift_avail == True:
                     if event.key == pygame.K_LSHIFT:
                         ans_turn = 1  
                         shift_avail = False
                         pygame.mixer.music.pause()
-                        
+                        # print("leftt")
                     if event.key == pygame.K_RSHIFT:
                         ans_turn = 2  
                         shift_avail = False
@@ -617,8 +557,8 @@ def main():
         word_wrap(screen, ques_list[select[init_number]], font1)
         
         global timer
-        timer = 10
-        timer_wrap(screen, int(timer), font1)
+        timer = "10"
+        timer_wrap(screen, timer, font1)
         
         # print(answer_option)
         option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
@@ -633,9 +573,9 @@ def main():
 
 
         if correct == 1:
-            screen.blit(correct_ans, (350, 20))
+            screen.blit(correct_ans, (350, 300))
         elif correct == 2:
-            screen.blit(wrong_ans, (350,20))
+            screen.blit(wrong_ans, (350,300))
             
         if type(ques_ans_number) == int:
             screen.blit(option_a, (100,400))
