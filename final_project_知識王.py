@@ -189,7 +189,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques1_list  # 激活主題1題庫
@@ -201,7 +201,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques2_list  # 激活主題2題庫
@@ -213,7 +213,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques3_list  # 激活主題3題庫
@@ -225,7 +225,7 @@ while n2:
         start_ck2.blit(sub41,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques4_list  # 激活主題4題庫
@@ -237,7 +237,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub51,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques5_list  # 激活主題5題庫
@@ -249,7 +249,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub61,(400,300))
-        if buttons[2]:
+        if buttons[0]:
             n2 = False
             back = False
             ques_list = ques6_list  # 激活主題6題庫
