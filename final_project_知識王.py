@@ -82,8 +82,9 @@ sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
 sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
-sub_question4 = open(path + "國學題目.txt", 'r', encoding = 'utf-8')
-sub_answer4 = open(path + "國學答案.txt", 'r', encoding = 'utf-8')
+sub_question5 = open(path + "國學題目.txt", 'r', encoding = 'utf-8')
+sub_answer5 = open(path + "國學答案.txt", 'r', encoding = 'utf-8')
+
 
 for a_ques1 in sub_question1:           # 把題庫們裝進清單裡面
     a_ques1 = a_ques1.strip("\n")
