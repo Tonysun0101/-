@@ -43,10 +43,10 @@ sub3 = sub_font.render("地理", True, (0,0,255),(0,255,0))
 sub31 = sub_font.render("地理", True, (0,255,255),(0,255,0))
 sub4 = sub_font.render("影視", True, (0,0,255),(0,255,0))
 sub41 = sub_font.render("影視", True, (0,255,255),(0,255,0))
-sub5 = sub_font.render("主題5", True, (0,0,255),(0,255,0))
-sub51 = sub_font.render("主題5", True, (0,255,255),(0,255,0))
-sub6 = sub_font.render("主題6", True, (0,0,255),(0,255,0))
-sub61 = sub_font.render("主題6", True, (0,255,255),(0,255,0))
+sub5 = sub_font.render("國學", True, (0,0,255),(0,255,0))
+sub51 = sub_font.render("國學", True, (0,255,255),(0,255,0))
+sub6 = sub_font.render("隨機", True, (0,0,255),(0,255,0))
+sub61 = sub_font.render("隨機", True, (0,255,255),(0,255,0))
 
 introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
 ok_1 = sub_font.render("OK", True, (0,0,255),(0,255,0))
@@ -87,6 +87,10 @@ sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
 sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
+sub_question5 = open(path + "國學題目.txt", 'r', encoding = 'utf-8')
+sub_answer5 = open(path + "國學答案.txt", 'r', encoding = 'utf-8')
+sub_question6 = open(path + "隨機題目.txt", 'r', encoding = 'utf-8')
+sub_answer6 = open(path + "隨機答案.txt", 'r', encoding = 'utf-8')
 
 for a_ques1 in sub_question1:           # 把題庫們裝進清單裡面
     a_ques1 = a_ques1.strip("\n")
@@ -119,6 +123,22 @@ for a_ans4 in sub_answer4:
     a_ans4 = a_ans4.strip("\n")
     a_ans_list4 = a_ans4.split(";")
     ans4_list.append(a_ans_list4)
+    
+for a_ques5 in sub_question5:
+    a_ques5 = a_ques5.strip("\n")
+    ques5_list.append(a_ques5)
+for a_ans5 in sub_answer5:
+    a_ans5 = a_ans5.strip("\n")
+    a_ans_list5 = a_ans5.split(";")
+    ans5_list.append(a_ans_list5)
+    
+for a_ques6 in sub_question6:
+    a_ques6 = a_ques6.strip("\n")
+    ques6_list.append(a_ques6)
+for a_ans6 in sub_answer6:
+    a_ans6 = a_ans6.strip("\n")
+    a_ans_list6 = a_ans6.split(";")
+    ans6_list.append(a_ans_list6)
 
 font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
 introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
@@ -284,7 +304,7 @@ def choice_function():
         buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
         x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
         start_ck2.blit(bg, (0,0))
-        if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:     # 我要玩第一個主題，把滑鼠放在第一個選項上面
+        if x1 >= 250 and x1 <= 350 and y1 >= 100 and y1 <= 150:     # 我要玩第一個主題，把滑鼠放在第一個選項上面
             start_ck2.blit(sub11,(250,100))
             start_ck2.blit(sub2,(400,100))
             start_ck2.blit(sub3,(250,200))
@@ -296,7 +316,7 @@ def choice_function():
                 # back = False
                 ques_list = ques1_list  # 激活主題1題庫
                 ans_list = ans1_list    # 激活主題1解答
-        elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
+        elif x1 >= 400 and x1 <= 500 and y1 >= 100 and y1 <= 150:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub21,(400,100))
             start_ck2.blit(sub3,(250,200))
@@ -308,7 +328,7 @@ def choice_function():
                 # back = False
                 ques_list = ques2_list  # 激活主題2題庫
                 ans_list = ans2_list    # 激活主題2解答
-        elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
+        elif x1 >= 250 and x1 <= 350 and y1 >= 200 and y1 <= 250:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
             start_ck2.blit(sub31,(250,200))
@@ -320,7 +340,7 @@ def choice_function():
                 # back = False
                 ques_list = ques3_list  # 激活主題3題庫
                 ans_list = ans3_list    # 激活主題3解答
-        elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
+        elif x1 >= 400 and x1 <= 500 and y1 >= 200 and y1 <= 250:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
             start_ck2.blit(sub3,(250,200))
@@ -332,7 +352,7 @@ def choice_function():
                 # back = False
                 ques_list = ques4_list  # 激活主題4題庫
                 ans_list = ans4_list    # 激活主題4解答
-        elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
+        elif x1 >= 250 and x1 <= 350 and y1 >= 300 and y1 <= 350:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
             start_ck2.blit(sub3,(250,200))
@@ -344,7 +364,7 @@ def choice_function():
                 # back = False
                 # ques_list = ques5_list  激活主題5題庫
                 # ans_list = ans5_list   激活主題5解答
-        elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
+        elif x1 >= 400 and x1 <= 500 and y1 >= 300 and y1 <= 350:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
             start_ck2.blit(sub3,(250,200))
