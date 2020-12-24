@@ -43,10 +43,10 @@ sub3 = sub_font.render("地理", True, (0,0,255),(0,255,0))
 sub31 = sub_font.render("地理", True, (0,255,255),(0,255,0))
 sub4 = sub_font.render("影視", True, (0,0,255),(0,255,0))
 sub41 = sub_font.render("影視", True, (0,255,255),(0,255,0))
-sub5 = sub_font.render("主題5", True, (0,0,255),(0,255,0))
-sub51 = sub_font.render("主題5", True, (0,255,255),(0,255,0))
-sub6 = sub_font.render("主題6", True, (0,0,255),(0,255,0))
-sub61 = sub_font.render("主題6", True, (0,255,255),(0,255,0))
+sub5 = sub_font.render("國學", True, (0,0,255),(0,255,0))
+sub51 = sub_font.render("國學", True, (0,255,255),(0,255,0))
+sub6 = sub_font.render("隨機", True, (0,0,255),(0,255,0))
+sub61 = sub_font.render("隨機", True, (0,255,255),(0,255,0))
 
 bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
 bg.convert()
@@ -82,6 +82,8 @@ sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
 sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
+sub_question4 = open(path + "國學題目.txt", 'r', encoding = 'utf-8')
+sub_answer4 = open(path + "國學答案.txt", 'r', encoding = 'utf-8')
 
 for a_ques1 in sub_question1:           # 把題庫們裝進清單裡面
     a_ques1 = a_ques1.strip("\n")
@@ -114,6 +116,14 @@ for a_ans4 in sub_answer4:
     a_ans4 = a_ans4.strip("\n")
     a_ans_list4 = a_ans4.split(";")
     ans4_list.append(a_ans_list4)
+    
+for a_ques5 in sub_question5:
+    a_ques5 = a_ques5.strip("\n")
+    ques5_list.append(a_ques5)
+for a_ans5 in sub_answer5:
+    a_ans5 = a_ans5.strip("\n")
+    a_ans_list5 = a_ans5.split(";")
+    ans5_list.append(a_ans_list5)
 
 
 # 選擇我要開始?結束?還是遊戲說明
@@ -229,8 +239,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques5_list  激活主題5題庫
-            # ans_list = ans5_list  激活主題5解答
+            ques_list = ques5_list  # 激活主題5題庫
+            ans_list = ans5_list  # 激活主題5解答
     elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
@@ -241,8 +251,8 @@ while n2:
         if buttons[2]:
             n2 = False
             back = False
-            # ques_list = ques6_list  激活主題6題庫
-            # ans_list = ans6_list  激活主題6解答
+            ques_list = ques6_list  # 激活主題6題庫
+            ans_list = ans6_list  # 激活主題6解答
     else:
         start_ck2.blit(sub1,(250,100)) 
         start_ck2.blit(sub2,(400,100))
