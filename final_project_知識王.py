@@ -128,47 +128,52 @@ for a_ans5 in sub_answer5:
 
 
 # 選擇我要開始?結束?還是遊戲說明
-n1 = True
-while n1:
-    clock.tick(30)
-    buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
-    x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
-    start_ck.blit(bg, (0,0))
-    if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
-        start_ck.blit(start_font_11, (200, 100))
-        start_ck.blit(start_font_2, (200, 250))
-        start_ck.blit(start_font_3, (200, 400))
-        if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
-            n1 = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
-    elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
-        start_ck.blit(start_font_21, (200, 250))
-        start_ck.blit(start_font_1, (200, 100))
-        start_ck.blit(start_font_3, (200, 400))
-        if buttons[0]:          # 在退出遊戲選項點選滑鼠左鍵
-            pygame.quit()       # 我要退出遊戲，整個pygame關閉
-            exit()
+def start_function():
+    start_run = True
+    introduction = False
+    while start_run:
+        clock.tick(30)
+        buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
+        x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
+        start_ck.blit(bg, (0,0))
+        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
+            start_ck.blit(start_font_11, (200, 100))
+            start_ck.blit(start_font_2, (200, 250))
+            start_ck.blit(start_font_3, (200, 400))
+            if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
+                start_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
 
-    elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:    # 遊戲說明畫面
-        start_ck.blit(start_font_31, (200, 400))
-        start_ck.blit(start_font_1, (200, 100))
-        start_ck.blit(start_font_2, (200, 250))
-    else:
-        start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
-        start_ck.blit(start_font_2, (200, 250))
-        start_ck.blit(start_font_3, (200, 400))
+        elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
+            start_ck.blit(start_font_21, (200, 250))
+            start_ck.blit(start_font_1, (200, 100))
+            start_ck.blit(start_font_3, (200, 400))
+            if buttons[0]:          # 在退出遊戲選項點選滑鼠左鍵
+                pygame.quit()       # 我要退出遊戲，整個pygame關閉
+                exit()
 
-    ck.blit(start_ck,(0,0))
-    pygame.display.update()
+        elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:    # 遊戲說明畫面
+            start_ck.blit(start_font_31, (200, 400))
+            start_ck.blit(start_font_1, (200, 100))
+            start_ck.blit(start_font_2, (200, 250))
+            if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
+                start_run = False       # 遊戲起始畫面結束
+                introduction = True     # 等等要進行遊戲介紹
+                print("嗨嗨")
+                break
+        else:
+            start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
+            start_ck.blit(start_font_2, (200, 250))
+            start_ck.blit(start_font_3, (200, 400))
 
-    for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
-        if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
-            print("遊戲退出...")
+        ck.blit(start_ck,(0,0))
+        pygame.display.update()
 
-            # quit 卸载所有的模块
-            pygame.quit()
-
-            # exit() 直接终止当前正在执行的程序
-            exit()
+        for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
+            if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
+                print("遊戲退出...")
+                pygame.quit()
+                exit()
+start_function()
 
 
 ck.blit(start_ck2,(0,0))
@@ -189,7 +194,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques1_list  # 激活主題1題庫
@@ -201,7 +206,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques2_list  # 激活主題2題庫
@@ -213,7 +218,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques3_list  # 激活主題3題庫
@@ -225,7 +230,7 @@ while n2:
         start_ck2.blit(sub41,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques4_list  # 激活主題4題庫
@@ -237,7 +242,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub51,(250,300))
         start_ck2.blit(sub6,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques5_list  # 激活主題5題庫
@@ -249,7 +254,7 @@ while n2:
         start_ck2.blit(sub4,(400,200))
         start_ck2.blit(sub5,(250,300))
         start_ck2.blit(sub61,(400,300))
-        if buttons[0]:
+        if buttons[2]:
             n2 = False
             back = False
             ques_list = ques6_list  # 激活主題6題庫
