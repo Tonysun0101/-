@@ -43,10 +43,15 @@ sub3 = sub_font.render("地理", True, (0,0,255),(0,255,0))
 sub31 = sub_font.render("地理", True, (0,255,255),(0,255,0))
 sub4 = sub_font.render("影視", True, (0,0,255),(0,255,0))
 sub41 = sub_font.render("影視", True, (0,255,255),(0,255,0))
-sub5 = sub_font.render("國學", True, (0,0,255),(0,255,0))
-sub51 = sub_font.render("國學", True, (0,255,255),(0,255,0))
-sub6 = sub_font.render("隨機", True, (0,0,255),(0,255,0))
-sub61 = sub_font.render("隨機", True, (0,255,255),(0,255,0))
+sub5 = sub_font.render("主題5", True, (0,0,255),(0,255,0))
+sub51 = sub_font.render("主題5", True, (0,255,255),(0,255,0))
+sub6 = sub_font.render("主題6", True, (0,0,255),(0,255,0))
+sub61 = sub_font.render("主題6", True, (0,255,255),(0,255,0))
+
+introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
+ok_1 = sub_font.render("OK", True, (0,0,255),(0,255,0))
+ok_2 = sub_font.render("OK", True, (0,255,255),(0,255,0))
+
 
 bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
 bg.convert()
@@ -82,9 +87,6 @@ sub_question3 = open(path + "地理題目.txt", 'r', encoding = 'utf-8')
 sub_answer3 = open(path + "地理答案.txt", 'r', encoding = 'utf-8')
 sub_question4 = open(path + "影視題目.txt", 'r', encoding = 'utf-8')
 sub_answer4 = open(path + "影視答案.txt", 'r', encoding = 'utf-8')
-sub_question5 = open(path + "國學題目.txt", 'r', encoding = 'utf-8')
-sub_answer5 = open(path + "國學答案.txt", 'r', encoding = 'utf-8')
-
 
 for a_ques1 in sub_question1:           # 把題庫們裝進清單裡面
     a_ques1 = a_ques1.strip("\n")
@@ -117,14 +119,28 @@ for a_ans4 in sub_answer4:
     a_ans4 = a_ans4.strip("\n")
     a_ans_list4 = a_ans4.split(";")
     ans4_list.append(a_ans_list4)
-    
-for a_ques5 in sub_question5:
-    a_ques5 = a_ques5.strip("\n")
-    ques5_list.append(a_ques5)
-for a_ans5 in sub_answer5:
-    a_ans5 = a_ans5.strip("\n")
-    a_ans_list5 = a_ans5.split(";")
-    ans5_list.append(a_ans_list5)
+
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
+introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
+
+def word_wrap(surf, text, font1, color=(255, 255, 255)):
+    font1.origin = True
+    words = text
+    width, height = (600,500)
+    line_spacing = font1.get_sized_height() + 2
+    x, y = 200, 50
+    space = font1.get_rect(' ')
+    for word in words:
+        bounds = font1.get_rect(word)
+        if x + bounds.width + bounds.x >= width:
+            x, y = 200, y + line_spacing
+        if x + bounds.width + bounds.x >= width:
+            raise ValueError("word too wide for the surface")
+        if y + bounds.height - bounds.y >= height:
+            raise ValueError("text to long for the surface")
+        font1.render_to(surf, (x, y), None, color)
+        x += bounds.width + space.width
+    return x, y
 
 
 # 選擇我要開始?結束?還是遊戲說明
@@ -151,7 +167,7 @@ def start_function():
                 pygame.quit()       # 我要退出遊戲，整個pygame關閉
                 exit()
 
-        elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:    # 遊戲說明畫面
+        elif x1 >= 200 and x1 <= 600 and y1 >= 400 and y1 <=550:    # 遊戲說明畫面
             start_ck.blit(start_font_31, (200, 400))
             start_ck.blit(start_font_1, (200, 100))
             start_ck.blit(start_font_2, (200, 250))
@@ -176,218 +192,287 @@ def start_function():
 start_function()
 
 
-ck.blit(start_ck2,(0,0))
-pygame.display.update()
-pygame.display.set_caption("選擇題目")
-#  以下可以写第一关的代码了
-n2 = True
-while n2:
-    clock.tick(30)
-    ck.blit(start_ck2, (0, 0))
-    buttons = pygame.mouse.get_pressed()
-    x1, y1 = pygame.mouse.get_pos()
-    start_ck2.blit(bg, (0,0))
-    if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:
-        start_ck2.blit(sub11,(250,100))
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques1_list  # 激活主題1題庫
-            ans_list = ans1_list  # 激活主題1解答
-    elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub21,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques2_list  # 激活主題2題庫
-            ans_list = ans2_list  # 激活主題2解答
-    elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub31,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques3_list  # 激活主題3題庫
-            ans_list = ans3_list  # 激活主題3解答
-    elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub41,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques4_list  # 激活主題4題庫
-            ans_list = ans4_list  # 激活主題4解答
-    elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub51,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques5_list  # 激活主題5題庫
-            ans_list = ans5_list  # 激活主題5解答
-    elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub61,(400,300))
-        if buttons[2]:
-            n2 = False
-            back = False
-            ques_list = ques6_list  # 激活主題6題庫
-            ans_list = ans6_list  # 激活主題6解答
-    else:
-        start_ck2.blit(sub1,(250,100)) 
-        start_ck2.blit(sub2,(400,100))
-        start_ck2.blit(sub3,(250,200))
-        start_ck2.blit(sub4,(400,200))
-        start_ck2.blit(sub5,(250,300))
-        start_ck2.blit(sub6,(400,300))
-        
-    pygame.display.update()
-    for event in pygame.event.get():
-
-        # 判断事件类型是否是退出事件
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:  # 可以回到目錄
-                n2 = False
-                back = True
-        elif event.type == pygame.QUIT:
-            print("遊戲退出...")
-
-            # quit 卸载所有的模块
-            pygame.quit()
-
-            # exit() 直接终止当前正在执行的程序
-            exit()
-select = random.sample(range(0,len(ques1_list)-1), 10)
-# print(select)
-
-if back is True:
-    pygame.display.set_caption("選擇遊戲")
-    n1 = True
-    while n1:
+###
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
+def intro_function():
+    intro_run = True
+    while intro_run:
         clock.tick(30)
-        buttons = pygame.mouse.get_pressed()
-        x1, y1 = pygame.mouse.get_pos()
+        buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
+        x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
         start_ck.blit(bg, (0,0))
-        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
+        
+        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
             start_ck.blit(start_font_11, (200, 100))
             start_ck.blit(start_font_2, (200, 250))
-            start_ck.blit(start_font_3, (200, 400))
-            if buttons[0]:
-                n1 = False
+            if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
+                intro_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
 
         elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
             start_ck.blit(start_font_21, (200, 250))
             start_ck.blit(start_font_1, (200, 100))
-            start_ck.blit(start_font_3, (200, 400))
-            if buttons[0]:
+            if buttons[0]:          # 在退出遊戲選項點選滑鼠左鍵
+                pygame.quit()       # 我要退出遊戲，整個pygame關閉
+                exit()
+        
+        else:
+            start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
+            start_ck.blit(start_font_2, (200, 250))
+        # print("嗨嗨")
+        word_wrap(start_ck,"我跟你說啦哈哈哈治療上硬度置１並長輩幹你娘",font1)
+        
+        ck.blit(start_ck,(0,0))
+        pygame.display.update()
+
+        for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
+            if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
+                print("遊戲退出...")
+                pygame.quit()
+                exit()
+intro_function()
+###
+
+
+# introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
+# intro_open = open(path + "遊戲說明_測試.txt", 'r', encoding = 'utf-8')
+# intro_list = []
+# for i in intro_open:
+    # i = i.strip("\n")
+    # intro_list.append(i)
+# print(intro_list[0])
+
+# def intro_function():
+    # intro_run = True
+    
+    # screen = pygame.display.set_mode((800, 600))
+    # font = pygame.font.Font(None, 32)
+    # clock = pygame.time.Clock()
+    
+    # while intro_run:
+        # screen.blit(bg, (0,0))
+        # word_wrap(screen, "hgdufhudfuhduhfuhdshudhufhdsjhufhudhsf", font1)
+        # clock.tick(30)
+        # ck.blit(start_ck2, (0, 0))
+        # buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
+        # x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
+        # start_ck2.blit(bg, (0,0))
+        # print(1)
+        # word_wrap(start_ck2, "2222", font1)
+        # print(1)
+        # if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:
+            # start_ck2.blit(ok_1, (250,100))
+            # if buttons[0]:              # 並且還滑鼠點選了他
+                # intro_run = False
+        # else:
+            # start_ck2.blit(ok_2, (250,100))
+# ck.blit(start_ck2,(0,0))
+# pygame.display.update()
+# pygame.display.set_caption("遊戲說明")
+# intro_function()
+# print(2)
+
+
+
+def choice_function():
+    choice_run = True
+    global ques_list
+    global ans_list
+    
+    while choice_run:
+        clock.tick(30)
+        ck.blit(start_ck2, (0, 0))
+        buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
+        x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
+        start_ck2.blit(bg, (0,0))
+        if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:     # 我要玩第一個主題，把滑鼠放在第一個選項上面
+            start_ck2.blit(sub11,(250,100))
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                ques_list = ques1_list  # 激活主題1題庫
+                ans_list = ans1_list    # 激活主題1解答
+        elif x1 >= 350 and x1 <= 500 and y1 >= 100 and y1 <= 150:
+            start_ck2.blit(sub1,(250,100)) 
+            start_ck2.blit(sub21,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                ques_list = ques2_list  # 激活主題2題庫
+                ans_list = ans2_list    # 激活主題2解答
+        elif x1 >= 200 and x1 <= 350 and y1 >= 200 and y1 <= 250:
+            start_ck2.blit(sub1,(250,100)) 
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub31,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                ques_list = ques3_list  # 激活主題3題庫
+                ans_list = ans3_list    # 激活主題3解答
+        elif x1 >= 350 and x1 <= 500 and y1 >= 200 and y1 <= 250:
+            start_ck2.blit(sub1,(250,100)) 
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub41,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                ques_list = ques4_list  # 激活主題4題庫
+                ans_list = ans4_list    # 激活主題4解答
+        elif x1 >= 200 and x1 <= 350 and y1 >= 300 and y1 <= 350:
+            start_ck2.blit(sub1,(250,100)) 
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub51,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                # ques_list = ques5_list  激活主題5題庫
+                # ans_list = ans5_list   激活主題5解答
+        elif x1 >= 350 and x1 <= 500 and y1 >= 300 and y1 <= 350:
+            start_ck2.blit(sub1,(250,100)) 
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub61,(400,300))
+            if buttons[2]:              # 並且還滑鼠點選了他
+                choice_run = False      # 選擇頁面結束，跳到遊戲介面
+                # back = False
+                # ques_list = ques6_list  激活主題6題庫
+                # ans_list = ans6_list  激活主題6解答
+        else:
+            start_ck2.blit(sub1,(250,100))      # 什麼都不做，則選擇畫面每個選項顏色不變
+            start_ck2.blit(sub2,(400,100))
+            start_ck2.blit(sub3,(250,200))
+            start_ck2.blit(sub4,(400,200))
+            start_ck2.blit(sub5,(250,300))
+            start_ck2.blit(sub6,(400,300))
+            
+        pygame.display.update()
+        for event in pygame.event.get():                # 判斷事件
+            if event.type == pygame.KEYDOWN:            # 鍵盤事件
+                if event.key == pygame.K_BACKSPACE:     # 可以回到目錄
+                    choice_run = False
+                    # start_function()                    # 回到起始畫面
+                    # back = True
+            elif event.type == pygame.QUIT:
+                print("遊戲退出...")
                 pygame.quit()
                 exit()
 
-        elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:
-            start_ck.blit(start_font_31, (200, 400))
-            start_ck.blit(start_font_1, (200, 100))
-            start_ck.blit(start_font_2, (200, 250))
-        else:
-            start_ck.blit(start_font_1, (200, 100))
-            start_ck.blit(start_font_2, (200, 250))
-            start_ck.blit(start_font_3, (200, 400))
+ck.blit(start_ck2,(0,0))
+pygame.display.update()
+pygame.display.set_caption("選擇題目")
+choice_function()
+
+select = random.sample(range(0,len(ques1_list)-1), 10)
+# print(select)
+
+# if back is True:
+    # pygame.display.set_caption("選擇遊戲")
+    # n1 = True
+    # while n1:
+        # clock.tick(30)
+        # print(111)
+        # buttons = pygame.mouse.get_pressed()
+        # x1, y1 = pygame.mouse.get_pos()
+        # start_ck.blit(bg, (0,0))
+        # if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
+            # start_ck.blit(start_font_11, (200, 100))
+            # start_ck.blit(start_font_2, (200, 250))
+            # start_ck.blit(start_font_3, (200, 400))
+            # if buttons[0]:
+                # print(22)
+                # back = False
+                # n1 = False
+
+        # elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
+            # start_ck.blit(start_font_21, (200, 250))
+            # start_ck.blit(start_font_1, (200, 100))
+            # start_ck.blit(start_font_3, (200, 400))
+            # if buttons[0]:
+                # pygame.quit()
+                # exit()
+
+        # elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:
+            # start_ck.blit(start_font_31, (200, 400))
+            # start_ck.blit(start_font_1, (200, 100))
+            # start_ck.blit(start_font_2, (200, 250))
+        # else:
+            # start_ck.blit(start_font_1, (200, 100))
+            # start_ck.blit(start_font_2, (200, 250))
+            # start_ck.blit(start_font_3, (200, 400))
 
 
-        ck.blit(start_ck,(0,0))
-        pygame.display.update()
+        # ck.blit(start_ck,(0,0))
+        # pygame.display.update()
 
 
         # 下面是监听退出动作
 
         # 监听事件
-        for event in pygame.event.get():
+        # for event in pygame.event.get():
 
             # 判断事件类型是否是退出事件
-            if event.type == pygame.QUIT:
-                print("遊戲退出...")
+            # if event.type == pygame.QUIT:
+                # print("遊戲退出...")
 
                 # quit 卸载所有的模块
-                pygame.quit()
+                # pygame.quit()
 
                 # exit() 直接终止当前正在执行的程序
-                exit()
+                # exit()
 
 
-    ck.blit(start_ck2,(0,0))
-    pygame.display.update()
+    # ck.blit(start_ck2,(0,0))
+    # pygame.display.update()
 
 
+# print(ques_list)
 pygame.display.set_caption("知識王")
 
-def word_wrap(surf, text, font1, color=(255, 255, 255)):
-    font1.origin = True
-    words = text
-    width, height = (600,500)
-    line_spacing = font1.get_sized_height() + 2
-    x, y = 200, 50
-    space = font1.get_rect(' ')
-    for word in words:
-        bounds = font1.get_rect(word)
-        if x + bounds.width + bounds.x >= width:
-            x, y = 200, y + line_spacing
-        if x + bounds.width + bounds.x >= width:
-            raise ValueError("word too wide for the surface")
-        if y + bounds.height - bounds.y >= height:
-            raise ValueError("text to long for the surface")
-        font1.render_to(surf, (x, y), None, color)
-        x += bounds.width + space.width
-    return x, y
 
-def timer_wrap(surf, text, font1, color=(255, 255, 255)):
-    font1.origin = True
-    words = text
-    width, height = (600,500)
-    line_spacing = font1.get_sized_height() + 2
-    x, y = 400, 350
-    space = font1.get_rect(' ')
-    for word in words:
-        bounds = font1.get_rect(word)
-        if x + bounds.width + bounds.x >= width:
-            x, y = 200, y + line_spacing
-        if x + bounds.width + bounds.x >= width:
-            raise ValueError("word too wide for the surface")
-        if y + bounds.height - bounds.y >= height:
-            raise ValueError("text to long for the surface")
-        font1.render_to(surf, (x, y), None, color)
-        x += bounds.width + space.width
-    return x, y
 
-font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
+# def timer_wrap(surf, text, font1, color=(255, 255, 255)):
+    # font1.origin = True
+    # words = text
+    # width, height = (600,500)
+    # line_spacing = font1.get_sized_height() + 2
+    # x, y = 400, 350
+    # space = font1.get_rect(' ')
+    # for word in words:
+        # bounds = font1.get_rect(word)
+        # if x + bounds.width + bounds.x >= width:
+            # x, y = 200, y + line_spacing
+        # if x + bounds.width + bounds.x >= width:
+            # raise ValueError("word too wide for the surface")
+        # if y + bounds.height - bounds.y >= height:
+            # raise ValueError("text to long for the surface")
+        # font1.render_to(surf, (x, y), None, color)
+        # x += bounds.width + space.width
+    # return x, y
 
 # clock = pg.time.Clock()
 # timer = 10
 # dt = 0
+
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
 
 def main(): 
     screen = pygame.display.set_mode((800, 600))
@@ -418,7 +503,6 @@ def main():
     result = ""
     pygame.mixer.music.play(-1)
     while not done:
-        # print(1)
         ques_ans_number = select[init_number]  # 第一題 list中的第一項
         current_question = ques_list[ques_ans_number]
         answer_option = ans_list[ques_ans_number]
@@ -572,9 +656,9 @@ def main():
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
         word_wrap(screen, ques_list[select[init_number]], font1)
         
-        global timer
-        timer = "10"
-        timer_wrap(screen, timer, font1)
+        # global timer
+        # timer = "10"
+        # timer_wrap(screen, timer, font1)
         
         # print(answer_option)
         option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
