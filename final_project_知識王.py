@@ -48,6 +48,11 @@ sub51 = sub_font.render("國學", True, (0,255,255),(0,255,0))
 sub6 = sub_font.render("隨機", True, (0,0,255),(0,255,0))
 sub61 = sub_font.render("隨機", True, (0,255,255),(0,255,0))
 
+info_start1 = sub_font.render("遊戲開始", True, (0,0,255),(0,255,0))
+info_start11 = sub_font.render("遊戲開始", True, (0,255,255),(0,255,0))
+info_start2 = sub_font.render("離開遊戲", True, (0,0,255),(0,255,0))
+info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(0,255,0))
+
 introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
 ok_1 = sub_font.render("OK", True, (0,0,255),(0,255,0))
 ok_2 = sub_font.render("OK", True, (0,255,255),(0,255,0))
@@ -162,9 +167,29 @@ def word_wrap(surf, text, font1, color=(255, 255, 255)):
         x += bounds.width + space.width
     return x, y
 
+def word_wrap1(surf, text, font1, color=(255, 255, 255)):
+    font1.origin = True
+    words = text
+    width, height = (600,500)
+    line_spacing = font1.get_sized_height() + 2
+    x, y = 200, 150
+    space = font1.get_rect(' ')
+    for word in words:
+        bounds = font1.get_rect(word)
+        if x + bounds.width + bounds.x >= width:
+            x, y = 200, y + line_spacing
+        if x + bounds.width + bounds.x >= width:
+            raise ValueError("word too wide for the surface")
+        if y + bounds.height - bounds.y >= height:
+            raise ValueError("text to long for the surface")
+        font1.render_to(surf, (x, y), None, color)
+        x += bounds.width + space.width
+    return x, y
+
 
 # 選擇我要開始?結束?還是遊戲說明
 def start_function():
+    global introduction
     start_run = True
     introduction = False
     while start_run:
@@ -178,6 +203,7 @@ def start_function():
             start_ck.blit(start_font_3, (200, 400))
             if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
                 start_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
+                introduction = False
 
         elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
             start_ck.blit(start_font_21, (200, 250))
@@ -213,33 +239,36 @@ start_function()
 
 
 ###
-font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 15)
 def intro_function():
     intro_run = True
+    if not introduction:
+        intro_run = False
     while intro_run:
         clock.tick(30)
         buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
         x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
         start_ck.blit(bg, (0,0))
-        
-        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
-            start_ck.blit(start_font_11, (200, 100))
-            start_ck.blit(start_font_2, (200, 250))
+        # print(1)
+        if x1 >= 100 and x1 <= 300 and y1 >= 50 and y1 <= 100:      # 滑鼠移動到哪個選項，哪個選項就要發光
+            start_ck.blit(info_start11, (100, 50))
+            start_ck.blit(info_start2, (500, 50))
             if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
                 intro_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
 
-        elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
-            start_ck.blit(start_font_21, (200, 250))
-            start_ck.blit(start_font_1, (200, 100))
+        elif x1 >= 500 and x1 <= 700 and y1 >= 50 and y1 <= 100:
+            start_ck.blit(info_start21, (500, 50))
+            start_ck.blit(info_start1, (100, 50))
             if buttons[0]:          # 在退出遊戲選項點選滑鼠左鍵
                 pygame.quit()       # 我要退出遊戲，整個pygame關閉
                 exit()
         
         else:
-            start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
-            start_ck.blit(start_font_2, (200, 250))
+            start_ck.blit(info_start1, (100, 50))         # 什麼都不做，則起始畫面每個選項顏色不變
+            start_ck.blit(info_start2, (500, 50))
         # print("嗨嗨")
-        word_wrap(start_ck,"我跟你說啦哈哈哈治療上硬度置１並長輩幹你娘",font1)
+        word_wrap1(start_ck,"按'遊戲開始'後， 點選滑鼠'右鍵'來選擇要玩哪個主題， 遊戲開始後兩個玩家進行搶答， 一號玩家按左邊的Shift按鍵搶答， 二號玩家按右邊的Shift按鍵搶答， 第一個按下Shift按鍵的玩家便可獲得這次回答機會， 按下鍵盤上的A、B、C、D按鍵來回答， 答錯的話就換另一個玩家回答， 不需按Shift按鍵， 一樣按下鍵盤上的A、B、C、D按鍵來回答。\
+                           一個題目最多回答四次， 答對一個選項加兩分， 答錯一個選項扣一分， 雙方可討論要不要按下'Enter'按鍵來跳過題目， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
         
         ck.blit(start_ck,(0,0))
         pygame.display.update()
