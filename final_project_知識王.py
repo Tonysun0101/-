@@ -250,46 +250,6 @@ def intro_function():
                 pygame.quit()
                 exit()
 intro_function()
-###
-
-
-# introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
-# intro_open = open(path + "遊戲說明_測試.txt", 'r', encoding = 'utf-8')
-# intro_list = []
-# for i in intro_open:
-    # i = i.strip("\n")
-    # intro_list.append(i)
-# print(intro_list[0])
-
-# def intro_function():
-    # intro_run = True
-    
-    # screen = pygame.display.set_mode((800, 600))
-    # font = pygame.font.Font(None, 32)
-    # clock = pygame.time.Clock()
-    
-    # while intro_run:
-        # screen.blit(bg, (0,0))
-        # word_wrap(screen, "hgdufhudfuhduhfuhdshudhufhdsjhufhudhsf", font1)
-        # clock.tick(30)
-        # ck.blit(start_ck2, (0, 0))
-        # buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
-        # x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
-        # start_ck2.blit(bg, (0,0))
-        # print(1)
-        # word_wrap(start_ck2, "2222", font1)
-        # print(1)
-        # if x1 >= 200 and x1 <= 350 and y1 >= 100 and y1 <= 150:
-            # start_ck2.blit(ok_1, (250,100))
-            # if buttons[0]:              # 並且還滑鼠點選了他
-                # intro_run = False
-        # else:
-            # start_ck2.blit(ok_2, (250,100))
-# ck.blit(start_ck2,(0,0))
-# pygame.display.update()
-# pygame.display.set_caption("遊戲說明")
-# intro_function()
-# print(2)
 
 
 
