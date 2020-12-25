@@ -2,6 +2,7 @@ import pygame
 import random
 import pygame.freetype
 import time
+import datetime
 
 path = "C://Users//Admin//Desktop//PBC_Final_Project//-//圖片聲音字型//"     # 把字體、圖片、音樂放置的資料夾路徑放在這裡
 
@@ -458,24 +459,24 @@ pygame.display.set_caption("知識王")
 
 
 
-# def timer_wrap(surf, text, font1, color=(255, 255, 255)):
-    # font1.origin = True
-    # words = text
-    # width, height = (600,500)
-    # line_spacing = font1.get_sized_height() + 2
-    # x, y = 400, 350
-    # space = font1.get_rect(' ')
-    # for word in words:
-        # bounds = font1.get_rect(word)
-        # if x + bounds.width + bounds.x >= width:
-            # x, y = 200, y + line_spacing
-        # if x + bounds.width + bounds.x >= width:
-            # raise ValueError("word too wide for the surface")
-        # if y + bounds.height - bounds.y >= height:
-            # raise ValueError("text to long for the surface")
-        # font1.render_to(surf, (x, y), None, color)
-        # x += bounds.width + space.width
-    # return x, y
+def timer_wrap(surf, text, font1, color=(255, 255, 255)):
+    font1.origin = True
+    words = text
+    width, height = (600,500)
+    line_spacing = font1.get_sized_height() + 2
+    x, y = 400, 350
+    space = font1.get_rect(' ')
+    for word in words:
+        bounds = font1.get_rect(word)
+        if x + bounds.width + bounds.x >= width:
+            x, y = 200, y + line_spacing
+        if x + bounds.width + bounds.x >= width:
+            raise ValueError("word too wide for the surface")
+        if y + bounds.height - bounds.y >= height:
+            raise ValueError("text to long for the surface")
+        font1.render_to(surf, (x, y), None, color)
+        x += bounds.width + space.width
+    return x, y
 
 # clock = pg.time.Clock()
 # timer = 10
@@ -486,7 +487,8 @@ font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
 def main(): 
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 32) 
-    clock = pygame.time.Clock() 
+    clock = pygame.time.Clock()
+    
     # blue = pygame.Color('dodgerblue')
     # font = pygame.font.Font(None, 50)
     # timer = 10
@@ -511,38 +513,104 @@ def main():
     word_color_d = (255,255,255)
     result = ""
     pygame.mixer.music.play(-1)
+    
+    # d_shift = time.time()
+    time_run = True
+    change = False
+    times_up = False
+    first = True
+    
     while not done:
         ques_ans_number = select[init_number]  # 第一題 list中的第一項
         current_question = ques_list[ques_ans_number]
         answer_option = ans_list[ques_ans_number]
         correct_answer = ans_list[ques_ans_number][4]
         
-        # print(current_question)
+        blit_timer = False
+        
+        if shift_avail == False and time_run == True and first == True:
+            d_now = time.time()
+            differ = d_now - d_shift
+            print(3 - differ)
+            blit_timer = True
+            # timer_wrap(screen, str(3 - differ), font1)
+            # print("你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了")
+        
+        
+        
+        if ans_turn == 1 and differ > 3 and time_run == True:
+            ans_turn = 2
+            first = False
+            d_now = time.time()
+            d_shift = time.time()
+            differ = d_now - d_shift
+            # print(3 - differ)
+            print(33333333333333333333333333333333333333)
+            times_up = True
+        elif ans_turn == 2 and differ > 3 and time_run == True:
+            ans_turn = 1
+            first = False
+            d_now = time.time()
+            d_shift = time.time()
+            differ = d_now - d_shift
+            # print(3 - differ)
+            print(33333333333333333333333333333333333333)
+            times_up = True
+        
+        if times_up == True or change == True:
+            d_now = time.time()
+            # d_shift = time.time()
+            differ = d_now - d_shift
+            print(3 - differ)
+            blit_timer = True
+            # timer_wrap(screen, str(3 - differ), font1)
+        # differ = 1
+        # timer_wrap(screen, "???", font1)
         for event in pygame.event.get():
             
             if event.type == pygame.QUIT:
-                done = True 
+                done = True
+            
 
             if event.type == pygame.KEYDOWN:
                 # print("keydown")
                 if shift_avail == True:
+                    print("烏拉哈哈哈哈哈咖咖咖咖咖咖咖咖阿 啊啊啊啊啊啊啊")
                     if event.key == pygame.K_LSHIFT:
                         ans_turn = 1  
                         shift_avail = False
+                        print("哈哈哈")
+                        # again = False
                         pygame.mixer.music.pause()
+                        
+                        d_shift = time.time()
+                        time_run = True
+                        
+                        # print(d_shift)
                         # print("leftt")
                     if event.key == pygame.K_RSHIFT:
                         ans_turn = 2  
                         shift_avail = False
                         pygame.mixer.music.pause()
+                        
+                        d_shift = time.time()
+                        time_run = True
+                        
 
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a and shift_avail == False:
+                    change = True
+                    d_shift = time.time()
                     answer = answer_option[0]   # 按a代表選了第0個選項
                     word_color_a = (255,0,0)
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
+                    change = True
                     if answer == correct_answer:
+                        time_run = False
+                        times_up = False
+                        change = False
+                        # again = True
                         if ans_turn == 1:       # 輪到一號回答，且回答正確，一號加分!
                             init_score1 += 2
                         elif ans_turn == 2:     # 輪到二號回答，且回答正確，二號加分!
@@ -559,13 +627,18 @@ def main():
                             ans_turn = 1        # 二號答錯了，失去此輪回答機會，換一號回答
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_b:
+                elif event.key == pygame.K_b and shift_avail == False:
+                    change = True
+                    d_shift = time.time()
                     answer = answer_option[1]
                     word_color_a = (255,255,255)
                     word_color_b = (255,0,0)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
                     if answer == correct_answer:
+                        time_run = False
+                        times_up = False
+                        change = False
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
@@ -582,13 +655,18 @@ def main():
                             ans_turn = 1
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_c:
+                elif event.key == pygame.K_c and shift_avail == False:
+                    change = True
+                    d_shift = time.time()
                     answer = answer_option[2]
                     word_color_a = (255,255,255)
                     word_color_b = (255,255,255)
                     word_color_c = (255,0,0)
                     word_color_d = (255,255,255)
                     if answer == correct_answer:
+                        time_run = False
+                        times_up = False
+                        change = False
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
@@ -605,13 +683,18 @@ def main():
                             ans_turn = 1
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_d:
+                elif event.key == pygame.K_d and shift_avail == False:
+                    change = True
+                    d_shift = time.time()
                     answer = answer_option[3]
                     word_color_a = (255,255,255)
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,0,0)
                     if answer == correct_answer:
+                        time_run = False
+                        times_up = False
+                        change = False
                         if ans_turn == 1:
                             init_score1 += 2
                         elif ans_turn == 2:
@@ -629,6 +712,10 @@ def main():
                         correct = 2
                         wrong_sound.play()
                 elif event.key == pygame.K_RETURN:
+                    change = False
+                    time_run = False
+                    times_up = False
+                    first = True
                     pygame.mixer.music.unpause()
                     word_color_a = (255,255,255)
                     word_color_b = (255,255,255)
@@ -636,6 +723,7 @@ def main():
                     word_color_d = (255,255,255)
                     ans_turn = 0
                     shift_avail = True
+                    time_run = True
                     
                     if init_number == len(select) - 1:
                         if init_score1 > init_score2:
@@ -664,10 +752,13 @@ def main():
         score2 = pygame.font.Font(None, 50)
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
         word_wrap(screen, ques_list[select[init_number]], font1)
+        if blit_timer == True:
+            timer_wrap(screen, str(3 - differ), font1)
         
         # global timer
         # timer = "10"
         # timer_wrap(screen, timer, font1)
+        # timer_wrap(screen, str(3 - differ), font1)
         
         # print(answer_option)
         option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
