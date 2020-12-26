@@ -57,6 +57,13 @@ info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(0,255,0))
 bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
 bg.convert()
 
+bg1 = pygame.image.load(path + '運動.jpg')          # 每個主題都會有不同背景
+bg2 = pygame.image.load(path + '英文.jpg')
+bg3 = pygame.image.load(path + '地理.jpg')
+bg4 = pygame.image.load(path + '影視.jpg')
+bg5 = pygame.image.load(path + '國學.jpg')
+bg6 = pygame.image.load(path + '隨機.jpg')
+
 # 音效部分
 pygame.mixer.music.load(path + "超級比一比.wav")  # 背景音樂
 
@@ -276,6 +283,7 @@ def choice_function():      # 選擇要玩哪個主題
     choice_run = True
     global ques_list
     global ans_list
+    global bg
     
     while choice_run:
         clock.tick(30)
@@ -294,6 +302,7 @@ def choice_function():      # 選擇要玩哪個主題
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques1_list  # 激活主題1題庫
                 ans_list = ans1_list    # 激活主題1解答
+                bg = bg1                # 套用第一個主題的背景
         elif x1 >= 400 and x1 <= 500 and y1 >= 100 and y1 <= 150:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub21,(400,100))
@@ -305,6 +314,7 @@ def choice_function():      # 選擇要玩哪個主題
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques2_list  # 激活主題2題庫
                 ans_list = ans2_list    # 激活主題2解答
+                bg = bg2                # 套用第二個主題的背景
         elif x1 >= 250 and x1 <= 350 and y1 >= 200 and y1 <= 250:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
@@ -316,6 +326,7 @@ def choice_function():      # 選擇要玩哪個主題
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques3_list  # 激活主題3題庫
                 ans_list = ans3_list    # 激活主題3解答
+                bg = bg3                # 套用第三個主題的背景
         elif x1 >= 400 and x1 <= 500 and y1 >= 200 and y1 <= 250:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
@@ -327,6 +338,7 @@ def choice_function():      # 選擇要玩哪個主題
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques4_list  # 激活主題4題庫
                 ans_list = ans4_list    # 激活主題4解答
+                bg = bg4                # 套用第四個主題的背景
         elif x1 >= 250 and x1 <= 350 and y1 >= 300 and y1 <= 350:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
@@ -337,7 +349,8 @@ def choice_function():      # 選擇要玩哪個主題
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques5_list  # 激活主題5題庫
-                ans_list = ans5_list   # 激活主題5解答
+                ans_list = ans5_list    # 激活主題5解答
+                bg = bg5                # 套用第五個主題的背景
         elif x1 >= 400 and x1 <= 500 and y1 >= 300 and y1 <= 350:
             start_ck2.blit(sub1,(250,100)) 
             start_ck2.blit(sub2,(400,100))
@@ -349,6 +362,7 @@ def choice_function():      # 選擇要玩哪個主題
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
                 ques_list = ques6_list  # 激活主題6題庫
                 ans_list = ans6_list    # 激活主題6解答
+                bg = bg6                # 套用第六個主題的背景
         else:
             start_ck2.blit(sub1,(250,100))      # 什麼都不做，則選擇畫面每個選項顏色不變
             start_ck2.blit(sub2,(400,100))
