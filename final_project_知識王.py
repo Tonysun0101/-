@@ -23,7 +23,7 @@ start_ck2.fill((255,255,255))               # 白色畫布2(第一關遊戲介�
 # 載入所需的素材字型圖片顏色等等，並幫他們命名
 start_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)         # 設定開始介面的統一字型，給他一個名稱
 start_font_1 = start_font.render("進入遊戲", True, (0, 0, 255), (0, 255, 0))    # 給三個選項各兩種顏色
-start_font_11 = start_font.render("進入遊戲", True, (0,255,255),(0,255,0))      # (滑鼠游標放上去和沒放上去的兩種顏色)
+start_font_11 = start_font.render("進入遊戲", True, (0,255,255),(0,255,0))      # 滑鼠游標放上去和沒放上去的兩種顏色
 start_font_2 = start_font.render("結束遊戲", True, (0,0,255),(0,255,0))
 start_font_21 = start_font.render("結束遊戲", True, (0,255,255),(0,255,0))
 start_font_3 = start_font.render("遊戲說明", True, (0,0,255),(0,255,0))
@@ -53,11 +53,6 @@ info_start1 = sub_font.render("遊戲開始", True, (0,0,255),(0,255,0))
 info_start11 = sub_font.render("遊戲開始", True, (0,255,255),(0,255,0))
 info_start2 = sub_font.render("離開遊戲", True, (0,0,255),(0,255,0))
 info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(0,255,0))
-
-introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
-ok_1 = sub_font.render("OK", True, (0,0,255),(0,255,0))
-ok_2 = sub_font.render("OK", True, (0,255,255),(0,255,0))
-
 
 bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
 bg.convert()
@@ -146,10 +141,8 @@ for a_ans6 in sub_answer6:
     a_ans_list6 = a_ans6.split(";")
     ans6_list.append(a_ans_list6)
 
-font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
-introduction_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 20)
-
-def word_wrap(surf, text, font1, color=(255, 255, 255)):
+font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)   # 把字體叫出來
+def word_wrap(surf, text, font1, color=(255, 255, 255)):                # 題目如何呈現在畫面上
     font1.origin = True
     words = text
     width, height = (600,500)
@@ -168,7 +161,7 @@ def word_wrap(surf, text, font1, color=(255, 255, 255)):
         x += bounds.width + space.width
     return x, y
 
-def word_wrap1(surf, text, font1, color=(255, 255, 255)):
+def word_wrap1(surf, text, font1, color=(255, 255, 255)):   # 遊戲說明如何呈現在畫面上(字型大小和上面word_wrap不一樣，所以分開列)
     font1.origin = True
     words = text
     width, height = (600,500)
@@ -193,18 +186,19 @@ def start_function():
     global introduction
     start_run = True
     introduction = False
+    
     while start_run:
         clock.tick(30)
         buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
         x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
         start_ck.blit(bg, (0,0))
-        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項，哪個選項就要發光
+        if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:      # 滑鼠移動到哪個選項(座標位置)，哪個選項就要發光
             start_ck.blit(start_font_11, (200, 100))
             start_ck.blit(start_font_2, (200, 250))
             start_ck.blit(start_font_3, (200, 400))
             if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
-                start_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
-                introduction = False
+                start_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲的介面
+                introduction = False    # 沒有要遊戲說明，因此跳過這個環節
 
         elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
             start_ck.blit(start_font_21, (200, 250))
@@ -221,7 +215,6 @@ def start_function():
             if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
                 start_run = False       # 遊戲起始畫面結束
                 introduction = True     # 等等要進行遊戲介紹
-                print("嗨嗨")
                 break
         else:
             start_ck.blit(start_font_1, (200, 100))         # 什麼都不做，則起始畫面每個選項顏色不變
@@ -229,33 +222,31 @@ def start_function():
             start_ck.blit(start_font_3, (200, 400))
 
         ck.blit(start_ck,(0,0))
-        pygame.display.update()
+        pygame.display.update()     # 刷新畫面
 
         for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
             if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
                 print("遊戲退出...")
                 pygame.quit()
                 exit()
-start_function()
+start_function()            # 把start_function()叫出來，開始第一個畫面
 
-
-###
 font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 15)
-def intro_function():
+def intro_function():       # 遊戲說明畫面
     intro_run = True
-    if not introduction:
+    if not introduction:    # 如果剛剛有點選遊戲說明，才需要這個環節
         intro_run = False
     while intro_run:
         clock.tick(30)
         buttons = pygame.mouse.get_pressed()    # buttons定義為滑鼠按下去的變數名稱
         x1, y1 = pygame.mouse.get_pos()         # 滑鼠游標目前的座標
         start_ck.blit(bg, (0,0))
-        # print(1)
+
         if x1 >= 100 and x1 <= 300 and y1 >= 50 and y1 <= 100:      # 滑鼠移動到哪個選項，哪個選項就要發光
             start_ck.blit(info_start11, (100, 50))
             start_ck.blit(info_start2, (500, 50))
             if buttons[0]:              # 在開始遊戲選項點選滑鼠左鍵
-                intro_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲介面
+                intro_run = False       # 遊戲起始畫面結束，跳到選擇哪個遊戲的介面
 
         elif x1 >= 500 and x1 <= 700 and y1 >= 50 and y1 <= 100:
             start_ck.blit(info_start21, (500, 50))
@@ -267,23 +258,21 @@ def intro_function():
         else:
             start_ck.blit(info_start1, (100, 50))         # 什麼都不做，則起始畫面每個選項顏色不變
             start_ck.blit(info_start2, (500, 50))
-        # print("嗨嗨")
         word_wrap1(start_ck,"按'遊戲開始'後， 點選滑鼠'右鍵'來選擇要玩哪個主題， 遊戲開始後兩個玩家進行搶答， 一號玩家按左邊的Shift按鍵搶答， 二號玩家按右邊的Shift按鍵搶答， 第一個按下Shift按鍵的玩家便可獲得這次回答機會， 按下鍵盤上的A、B、C、D按鍵來回答， 答錯的話就換另一個玩家回答， 不需按Shift按鍵， 一樣按下鍵盤上的A、B、C、D按鍵來回答。\
                            一個題目最多回答四次， 答對一個選項加兩分， 答錯一個選項扣一分， 雙方可討論要不要按下'Enter'按鍵來跳過題目， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
         
-        ck.blit(start_ck,(0,0))
-        pygame.display.update()
+        ck.blit(start_ck,(0,0))     # 把word_wrap1()叫出來，並把說明文字丟進去，最後會呈現在遊戲說明畫面上
+        pygame.display.update()     # 刷新畫面
+        pygame.display.set_caption("遊戲介紹")
 
         for event in pygame.event.get():        # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
             if event.type == pygame.QUIT:       # 和點選"退出遊戲"有一樣的效果
                 print("遊戲退出...")
                 pygame.quit()
                 exit()
-intro_function()
+intro_function()            # 把介紹畫面叫出來，當然，如果introduction == False，就會跳過這個步驟
 
-
-
-def choice_function():
+def choice_function():      # 選擇要玩哪個主題
     choice_run = True
     global ques_list
     global ans_list
@@ -303,7 +292,6 @@ def choice_function():
             start_ck2.blit(sub6,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques1_list  # 激活主題1題庫
                 ans_list = ans1_list    # 激活主題1解答
         elif x1 >= 400 and x1 <= 500 and y1 >= 100 and y1 <= 150:
@@ -315,7 +303,6 @@ def choice_function():
             start_ck2.blit(sub6,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques2_list  # 激活主題2題庫
                 ans_list = ans2_list    # 激活主題2解答
         elif x1 >= 250 and x1 <= 350 and y1 >= 200 and y1 <= 250:
@@ -327,7 +314,6 @@ def choice_function():
             start_ck2.blit(sub6,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques3_list  # 激活主題3題庫
                 ans_list = ans3_list    # 激活主題3解答
         elif x1 >= 400 and x1 <= 500 and y1 >= 200 and y1 <= 250:
@@ -339,7 +325,6 @@ def choice_function():
             start_ck2.blit(sub6,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques4_list  # 激活主題4題庫
                 ans_list = ans4_list    # 激活主題4解答
         elif x1 >= 250 and x1 <= 350 and y1 >= 300 and y1 <= 350:
@@ -351,7 +336,6 @@ def choice_function():
             start_ck2.blit(sub6,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques5_list  # 激活主題5題庫
                 ans_list = ans5_list   # 激活主題5解答
         elif x1 >= 400 and x1 <= 500 and y1 >= 300 and y1 <= 350:
@@ -363,9 +347,8 @@ def choice_function():
             start_ck2.blit(sub61,(400,300))
             if buttons[2]:              # 並且還滑鼠點選了他
                 choice_run = False      # 選擇頁面結束，跳到遊戲介面
-                # back = False
                 ques_list = ques6_list  # 激活主題6題庫
-                ans_list = ans6_list  # 激活主題6解答
+                ans_list = ans6_list    # 激活主題6解答
         else:
             start_ck2.blit(sub1,(250,100))      # 什麼都不做，則選擇畫面每個選項顏色不變
             start_ck2.blit(sub2,(400,100))
@@ -373,261 +356,161 @@ def choice_function():
             start_ck2.blit(sub4,(400,200))
             start_ck2.blit(sub5,(250,300))
             start_ck2.blit(sub6,(400,300))
-            
+        
+        ck.blit(start_ck2,(0,0))
+        pygame.display.set_caption("選擇題目")
         pygame.display.update()
-        for event in pygame.event.get():                # 判斷事件
-            if event.type == pygame.KEYDOWN:            # 鍵盤事件
-                if event.key == pygame.K_BACKSPACE:     # 可以回到目錄
-                    choice_run = False
-                    # start_function()                    # 回到起始畫面
-                    # back = True
-            elif event.type == pygame.QUIT:
+        for event in pygame.event.get():        # 判斷事件
+            if event.type == pygame.QUIT:       # 如果直接點選畫面右上角的關閉按紐，則pygame直接結束
                 print("遊戲退出...")
                 pygame.quit()
                 exit()
-
-ck.blit(start_ck2,(0,0))
-pygame.display.update()
-pygame.display.set_caption("選擇題目")
 choice_function()
 
-select = random.sample(range(0,len(ques_list)-1), 10)
-# print(select)
 
-# if back is True:
-    # pygame.display.set_caption("選擇遊戲")
-    # n1 = True
-    # while n1:
-        # clock.tick(30)
-        # print(111)
-        # buttons = pygame.mouse.get_pressed()
-        # x1, y1 = pygame.mouse.get_pos()
-        # start_ck.blit(bg, (0,0))
-        # if x1 >= 200 and x1 <= 600 and y1 >= 100 and y1 <=250:
-            # start_ck.blit(start_font_11, (200, 100))
-            # start_ck.blit(start_font_2, (200, 250))
-            # start_ck.blit(start_font_3, (200, 400))
-            # if buttons[0]:
-                # print(22)
-                # back = False
-                # n1 = False
-
-        # elif x1 >= 200 and x1 <= 600 and y1 >= 250 and y1 <=400:
-            # start_ck.blit(start_font_21, (200, 250))
-            # start_ck.blit(start_font_1, (200, 100))
-            # start_ck.blit(start_font_3, (200, 400))
-            # if buttons[0]:
-                # pygame.quit()
-                # exit()
-
-        # elif x1 >= 200 and x1 <= 700 and y1 >= 400 and y1 <=550:
-            # start_ck.blit(start_font_31, (200, 400))
-            # start_ck.blit(start_font_1, (200, 100))
-            # start_ck.blit(start_font_2, (200, 250))
-        # else:
-            # start_ck.blit(start_font_1, (200, 100))
-            # start_ck.blit(start_font_2, (200, 250))
-            # start_ck.blit(start_font_3, (200, 400))
-
-
-        # ck.blit(start_ck,(0,0))
-        # pygame.display.update()
-
-
-        # 下面是监听退出动作
-
-        # 监听事件
-        # for event in pygame.event.get():
-
-            # 判断事件类型是否是退出事件
-            # if event.type == pygame.QUIT:
-                # print("遊戲退出...")
-
-                # quit 卸载所有的模块
-                # pygame.quit()
-
-                # exit() 直接终止当前正在执行的程序
-                # exit()
-
-
-    # ck.blit(start_ck2,(0,0))
-    # pygame.display.update()
-
-
-# print(ques_list)
-pygame.display.set_caption("知識王")
-
-
-
-def timer_wrap(surf, text, font1, color=(255, 255, 255)):
-    font1.origin = True
+font2 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 15)
+def timer_wrap(surf, text, font2, color=(255, 255, 255)):   # 計時器字型格式
+    font2.origin = True
     words = text
     width, height = (600,500)
-    line_spacing = font1.get_sized_height() + 2
+    line_spacing = font2.get_sized_height() + 2
     x, y = 400, 350
-    space = font1.get_rect(' ')
+    space = font2.get_rect(' ')
     for word in words:
-        bounds = font1.get_rect(word)
+        bounds = font2.get_rect(word)
         if x + bounds.width + bounds.x >= width:
             x, y = 200, y + line_spacing
         if x + bounds.width + bounds.x >= width:
             raise ValueError("word too wide for the surface")
         if y + bounds.height - bounds.y >= height:
             raise ValueError("text to long for the surface")
-        font1.render_to(surf, (x, y), None, color)
+        font2.render_to(surf, (x, y), None, color)
         x += bounds.width + space.width
     return x, y
 
-# clock = pg.time.Clock()
-# timer = 10
-# dt = 0
 
-font1 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
+pygame.display.set_caption("知識王")   # 遊戲頁面名稱
+font0 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
+font2 = pygame.freetype.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
+select = random.sample(range(0,len(ques_list)-1), 10)
 
-def main(): 
+def main():     # 主要遊戲開始了!
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 32) 
     clock = pygame.time.Clock()
     
-    # blue = pygame.Color('dodgerblue')
-    # font = pygame.font.Font(None, 50)
-    # timer = 10
-    # txt = font.render(str(round(timer, 2)), True, blue)
-    # screen.blit(txt, (225, 10))
-    # pygame.display.flip()
- 
-    done = False 
-    init_score1 = 0
+    init_score1 = 0     # 一開始分數都是零分
     init_score2 = 0
-    correct_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
+    init_number = 0     # 隨機清單裡面的第一個數字
+    correct = 0         # 一開始還沒有人答對
+    ans_turn = 0        # 一開始還沒有任何人回答
+    
+    correct_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)     # 答對該選項後，該選項要亮起來
     correct_ans = correct_ans.render("correct", True, (0,0,255),(0,255,0))
-    wrong_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)
+    wrong_ans = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)       # 答錯該選項後，該選項要亮起來
     wrong_ans = wrong_ans.render("wrong", True, (0,0,255),(0,255,0))
-    correct = 0
-    ans_turn = 0
-    shift_avail = True
-    init_number = 0
-    word_color_a = (255,255,255)
+    
+    shift_avail = True      # 一開始可以按Shift來搶答
+    done = False            # 迴圈還沒結束
+    
+    word_color_a = (255,255,255)    # 設定所有選項的預設顏色
     word_color_b = (255,255,255)
     word_color_c = (255,255,255)
     word_color_d = (255,255,255)
     result = ""
     pygame.mixer.music.play(-1)
     
-    # d_shift = time.time()
-    time_run = True
-    change = False
-    times_up = False
-    first = True
+    time_run = True     # 計時器還在倒數
+    change = False      # 還沒換人回答(時間到了或者是有人回答了，就得換人回答)
+    times_up = False    # 時間還沒到
+    first = True        # 這是這個題目第一次被回答
     
-    while not done:
-        ques_ans_number = select[init_number]  # 第一題 list中的第一項
-        current_question = ques_list[ques_ans_number]
-        answer_option = ans_list[ques_ans_number]
-        correct_answer = ans_list[ques_ans_number][4]
+    while not done:     # 開始跑一個無限回圈
+        ques_ans_number = select[init_number]               # 在隨機清單裡面選第一個數字
+        current_question = ques_list[ques_ans_number]       # 這個數字就是我們這回題目的編號，把這個隨機題目叫出來
+        answer_option = ans_list[ques_ans_number]           # 答案也是一樣的道理
+        correct_answer = ans_list[ques_ans_number][4]       # 正確答案會是答案清單裡面的第五項，把它放進變數裡面
         
-        blit_timer = False
+        blit_timer = False      # 計時器沒有運作
         
-        if shift_avail == False and time_run == True and first == True:
-            d_now = time.time()
-            differ = d_now - d_shift
+        if shift_avail == False and time_run == True and first == True:     # 按下Shift了，開始計時，而這是這個題目第一次被計時
+            d_now = time.time()         # 記下當下時間
+            differ = d_now - d_shift    # 把當下時間減去按下shift瞬間的時間，得出自從搶答後已經過了多少秒數
+            print(3 - differ)           # 用3-differ就是我要的計時器
+            blit_timer = True           # 計時器運作了!
+
+        if ans_turn == 1 and differ > 3 and time_run == True:       # 如果秒數大於三，代表這個玩家回答太久了
+            ans_turn = 2                # 換成二號回答
+            first = False               # 這不是第一次計時了
+            d_shift = time.time()       # 計下換人回答當下的時間
+            times_up = True             # 計下有人沒在時間內回答
+        elif ans_turn == 2 and differ > 3 and time_run == True:     # 如果秒數大於三，代表這個玩家回答太久了
+            ans_turn = 1                # 換成一號回答
+            first = False               # 這不是第一次計時了
+            d_shift = time.time()       # 計下換人回答當下的時間
+            times_up = True             # 計下有人沒在時間內回答
+        
+        if times_up == True or change == True:      # 有人沒在時間內回答，或是有人回答了，都要換人，並重新計時
+            d_now = time.time()                     # 記下當下時間
+            differ = d_now - d_shift                # 和換人當下的秒數相減，就可以得出新的計時器
             print(3 - differ)
-            blit_timer = True
-            # timer_wrap(screen, str(3 - differ), font1)
-            # print("你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了你媽死了")
+            blit_timer = True                       # 計時器正在運作
         
-        
-        
-        if ans_turn == 1 and differ > 3 and time_run == True:
-            ans_turn = 2
-            first = False
-            d_now = time.time()
-            d_shift = time.time()
-            differ = d_now - d_shift
-            # print(3 - differ)
-            print(33333333333333333333333333333333333333)
-            times_up = True
-        elif ans_turn == 2 and differ > 3 and time_run == True:
-            ans_turn = 1
-            first = False
-            d_now = time.time()
-            d_shift = time.time()
-            differ = d_now - d_shift
-            # print(3 - differ)
-            print(33333333333333333333333333333333333333)
-            times_up = True
-        
-        if times_up == True or change == True:
-            d_now = time.time()
-            # d_shift = time.time()
-            differ = d_now - d_shift
-            print(3 - differ)
-            blit_timer = True
-            # timer_wrap(screen, str(3 - differ), font1)
-        # differ = 1
-        # timer_wrap(screen, "???", font1)
-        for event in pygame.event.get():
+        for event in pygame.event.get():    # 判斷玩家做了哪些動作
             
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:   # 直接關掉視窗，迴圈結束
                 done = True
             
 
-            if event.type == pygame.KEYDOWN:
-                # print("keydown")
-                if shift_avail == True:
-                    print("烏拉哈哈哈哈哈咖咖咖咖咖咖咖咖阿 啊啊啊啊啊啊啊")
-                    if event.key == pygame.K_LSHIFT:
-                        ans_turn = 1  
-                        shift_avail = False
-                        print("哈哈哈")
-                        # again = False
-                        pygame.mixer.music.pause()
+            if event.type == pygame.KEYDOWN:    # 鍵盤事件
+                if shift_avail == True:         # 如果可以搶答
+                    if event.key == pygame.K_LSHIFT:    # 如果一號玩家按下Shift搶答了
+                        ans_turn = 1                    # 這輪是一號玩家的局
+                        shift_avail = False             # 這個題目不能搶答了，必須輪流在時間內回答
+                        pygame.mixer.music.pause()      # 緊張的音樂停止
                         
-                        d_shift = time.time()
-                        time_run = True
+                        d_shift = time.time()           # 記下搶答瞬間當下的時間
+                        time_run = True                 # 時間正在跑
                         
-                        # print(d_shift)
-                        # print("leftt")
-                    if event.key == pygame.K_RSHIFT:
-                        ans_turn = 2  
-                        shift_avail = False
-                        pygame.mixer.music.pause()
+                    if event.key == pygame.K_RSHIFT:    # 如果二號玩家按下Shift搶答了
+                        ans_turn = 2                    # 這輪是二號玩家的局
+                        shift_avail = False             # 這個題目不能搶答了，必須輪流在時間內回答
+                        pygame.mixer.music.pause()      # 緊張的音樂停止
                         
-                        d_shift = time.time()
-                        time_run = True
-                        
+                        d_shift = time.time()           # 記下搶答瞬間當下的時間
+                        time_run = True                 # 時間正在跑
 
-                if event.key == pygame.K_a and shift_avail == False:
-                    change = True
-                    d_shift = time.time()
-                    answer = answer_option[0]   # 按a代表選了第0個選項
-                    word_color_a = (255,0,0)
+                if event.key == pygame.K_a and shift_avail == False:    # 如果玩家按了shift，並且選擇了a當答案
+                    change = True                   # 等等要換人回答
+                    d_shift = time.time()           # 記下選答案瞬間的時間
+                    answer = answer_option[0]       # 按a代表選了第0個選項
+                    word_color_a = (255,0,0)        # 選項a要亮起來(這裡先記下他們的顏色就好，後面才會blit)
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
-                    change = True
-                    if answer == correct_answer:
-                        time_run = False
-                        times_up = False
-                        change = False
-                        # again = True
-                        if ans_turn == 1:       # 輪到一號回答，且回答正確，一號加分!
-                            init_score1 += 2
-                        elif ans_turn == 2:     # 輪到二號回答，且回答正確，二號加分!
-                            init_score2 += 2
-                        ans_turn = 0
-                        correct = 1
-                        correct_sound.play()
+                    
+                    if answer == correct_answer:    # 如果回答正確
+                        time_run = False            # 計時器停止運作
+                        times_up = False            # 沒有人超時回答
+                        change = False              # 因為回答正確，所以不用進行換人，而是進入下一輪搶答環節
+                        if ans_turn == 1:           # 如果是一號回答正確，一號加分!
+                            init_score1 += 2        # 加兩分
+                        elif ans_turn == 2:         # 如果是二號回答正確，二號加分!
+                            init_score2 += 2        # 加兩分
+                        ans_turn = 0                # 回到沒有人回答的情況，因為等等要搶答
+                        correct = 1                 # 記下"有人回答正確"這件事情
+                        correct_sound.play()        # 播放回答正確的音樂
                     else:
-                        if ans_turn == 1:
+                        if ans_turn == 1:           # 一號回答錯了，扣一分
                             init_score1 -= 1
-                            ans_turn = 2        # 一號答錯了，失去此輪回答機會，換二號回答
-                        elif ans_turn == 2:
+                            ans_turn = 2            # 一號答錯了，失去此輪回答機會，換二號回答
+                        elif ans_turn == 2:         # 二號回答錯了，扣一分
                             init_score2 -= 1
-                            ans_turn = 1        # 二號答錯了，失去此輪回答機會，換一號回答
-                        correct = 2
-                        wrong_sound.play()
-                elif event.key == pygame.K_b and shift_avail == False:
+                            ans_turn = 1            # 二號答錯了，失去此輪回答機會，換一號回答
+                        correct = 2                 # 用correct = 2，記下"有人回答錯誤"這件事情
+                        wrong_sound.play()          # 撥放回答錯誤的音效
+                
+                elif event.key == pygame.K_b and shift_avail == False:  # 如果玩家按了shift，並且選擇了b當答案
                     change = True
                     d_shift = time.time()
                     answer = answer_option[1]
@@ -655,7 +538,8 @@ def main():
                             ans_turn = 1
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_c and shift_avail == False:
+                
+                elif event.key == pygame.K_c and shift_avail == False:  # 如果玩家按了shift，並且選擇了c當答案
                     change = True
                     d_shift = time.time()
                     answer = answer_option[2]
@@ -683,7 +567,8 @@ def main():
                             ans_turn = 1
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_d and shift_avail == False:
+                
+                elif event.key == pygame.K_d and shift_avail == False:  # 如果玩家按了shift，並且選擇了d當答案
                     change = True
                     d_shift = time.time()
                     answer = answer_option[3]
@@ -711,58 +596,52 @@ def main():
                             ans_turn = 1
                         correct = 2
                         wrong_sound.play()
-                elif event.key == pygame.K_RETURN:
-                    change = False
-                    time_run = False
-                    times_up = False
-                    first = True
-                    pygame.mixer.music.unpause()
-                    word_color_a = (255,255,255)
+                
+                elif event.key == pygame.K_RETURN:  # 如果有人按下enter鍵盤
+                    change = False                  # 沒有換人的動作
+                    time_run = False                # 計時器停止運作
+                    times_up = False                # 沒有人超時回答
+                    first = True                    # 下一題第一次被啟動
+                    pygame.mixer.music.unpause()    # 音樂不要停，接著播
+                    word_color_a = (255,255,255)    # 沒有選項是亮著的
                     word_color_b = (255,255,255)
                     word_color_c = (255,255,255)
                     word_color_d = (255,255,255)
-                    ans_turn = 0
-                    shift_avail = True
-                    time_run = True
+                    ans_turn = 0                    # 一開始沒有人回答
+                    correct = 0                     # 一開始沒有人回答正確
+                    shift_avail = True              # 開放搶答
                     
-                    if init_number == len(select) - 1:
-                        if init_score1 > init_score2:
+                    if init_number == len(select) - 1:      # 代表已經玩了十個題目了
+                        pygame.mixer.music.pause()          # 緊張的音樂停止
+                        if init_score1 > init_score2:       # 顯示哪個玩家贏了
                             result = "P1 win"
                         elif init_score1 == init_score2:
                             result = "Tie"
                         elif init_score1 < init_score2:
                             result = "P2 win"
-                    if init_number < len(select) - 1:
-                        if type(init_number) != int:  # 一開始先不秀題目 按了enter後開始
+                    if init_number < len(select) - 1:       # 如果還沒玩十題
+                        if type(init_number) != int:        # 一開始先不秀題目，按了enter後開始
                             init_number = 0
                         else:
-                            init_number += 1# 跳下一個題目跟解答
-                    else:
-                        pass
-                    correct = 0
+                            init_number += 1                # 跳下一個隨機題目跟解答
+                    
                 else:
-                    if event.type == pygame.KEYDOWN:
+                    if event.type == pygame.KEYDOWN:        # 按esc鍵盤可以退出遊戲
                         if event.key == pygame.K_ESCAPE:
                             done = True
-        screen.blit(bg, (0,0))
-        # print(question)
-        # print(type(question))
-        score1 = pygame.font.Font(None, 50)
-        score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))
-        score2 = pygame.font.Font(None, 50)
-        score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))
-        word_wrap(screen, ques_list[select[init_number]], font1)
-        if blit_timer == True:
-            timer_wrap(screen, str(3 - differ), font1)
         
-        # global timer
-        # timer = "10"
-        # timer_wrap(screen, timer, font1)
-        # timer_wrap(screen, str(3 - differ), font1)
+        screen.blit(bg, (0,0))  # 背景
+        score1 = pygame.font.Font(None, 50)                             # 一號玩家分數字型
+        score1 = score1.render(str(init_score1), (0,0,255),(0,255,0))   # 一號玩家分數顏色
+        score2 = pygame.font.Font(None, 50)                             # 二號玩家分數字型
+        score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))   # 二號玩家分數顏色
         
-        # print(answer_option)
-        option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
-        option_a = option_a.render(str("(A)" + " " + answer_option[0]), (255,255,255),word_color_a)
+        word_wrap(screen, ques_list[select[init_number]], font0)        # 題目顯示
+        if blit_timer == True:                                          # 計時器顯示，前提是blit_timer == True
+            timer_wrap(screen, str(round(3 - differ, 3)), font2)
+        
+        option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)                            # 答案們的字型以及顏色
+        option_a = option_a.render(str("(A)" + " " + answer_option[0]), (255,255,255),word_color_a)     # 除了ABCD，還要套入題庫中的答案
         option_b = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_b = option_b.render(str("(B)" + " " + answer_option[1]), (255,255,255),word_color_b)
         option_c = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
@@ -770,35 +649,30 @@ def main():
         option_d = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)
         option_d = option_d.render(str("(D)" + " " + answer_option[3]), (255,255,255),word_color_d)
 
-
-
-        if correct == 1:
-            screen.blit(correct_ans, (350, 300))
-        elif correct == 2:
-            screen.blit(wrong_ans, (350,300))
+        if correct == 1:                            # 如果這輪有人回答正確
+            screen.blit(correct_ans, (350, 300))    # blit correct_ans(也就是correct)
+        elif correct == 2:                          # 如果這輪有人回答錯誤
+            screen.blit(wrong_ans, (350,300))       # blit wrong_ans(也就是wrong)
             
-        if type(ques_ans_number) == int:
+        if type(ques_ans_number) == int:        # 讓所有選項blit出來
             screen.blit(option_a, (100,400))
             screen.blit(option_b, (400,400))
             screen.blit(option_c, (100,500))
             screen.blit(option_d, (400,500))
-        screen.blit(score1, (80,60))
+        screen.blit(score1, (80,60))            # 讓分數列表blit出來
         screen.blit(score2, (700,60))
-        if ans_turn == 0:
+        if ans_turn == 0:                       # 如果這輪還沒有人回答，則玩家名稱不亮
             screen.blit(player1, (30, 20))
             screen.blit(player2, (650, 20))
         elif ans_turn == 1:
-            screen.blit(player11, (30, 20))
+            screen.blit(player11, (30, 20))     # 如果這輪一號回答，則一號玩家名稱亮起
             screen.blit(player2, (650, 20))
         elif ans_turn == 2:
-            screen.blit(player1, (30, 20))
-            screen.blit(player21, (650, 20))            
-        # screen.blit(txt_surface, (input_box.x+5, input_box.y+5)) 
-        # Blit the input_box rect. 
-        # pygame.draw.rect(screen, color, input_box, 2)
+            screen.blit(player1, (30, 20))      # 如果這輪二號回答，則二號玩家名稱亮起
+            screen.blit(player21, (650, 20))
 
-        if init_number == len(select) - 1:
-            final_result = pygame.font.Font(None, 100)
+        if init_number == len(select) - 1:                                      # 玩十個題目了
+            final_result = pygame.font.Font(None, 100)                          # 遊戲最終結果的字型顏色
             final_result = final_result.render(result, (0,0,255),(0,255,0))
             screen.blit(final_result, (325,300))
         pygame.display.flip()
