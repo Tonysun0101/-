@@ -54,7 +54,7 @@ info_start11 = sub_font.render("遊戲開始", True, (0,255,255),(0,255,0))
 info_start2 = sub_font.render("離開遊戲", True, (0,0,255),(0,255,0))
 info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(0,255,0))
 
-bg = pygame.image.load(path + '貓貓.jpg')     # 整個遊戲的背景
+bg = pygame.image.load(path + 'brain.png')     # 整個遊戲的背景
 bg.convert()
 
 bg1 = pygame.image.load(path + '運動.jpg')          # 每個主題都會有不同背景
@@ -62,7 +62,7 @@ bg2 = pygame.image.load(path + '英文.jpg')
 bg3 = pygame.image.load(path + '地理.jpg')
 bg4 = pygame.image.load(path + '影視.jpg')
 bg5 = pygame.image.load(path + '國學.jpg')
-bg6 = pygame.image.load(path + '隨機.jpg')
+bg6 = pygame.image.load(path + '隨機.png')
 
 # 音效部分
 pygame.mixer.music.load(path + "超級比一比.wav")  # 背景音樂
@@ -266,7 +266,7 @@ def intro_function():       # 遊戲說明畫面
             start_ck.blit(info_start1, (100, 50))         # 什麼都不做，則起始畫面每個選項顏色不變
             start_ck.blit(info_start2, (500, 50))
         word_wrap1(start_ck,"按'遊戲開始'後， 點選滑鼠'右鍵'來選擇要玩哪個主題， 遊戲開始後兩個玩家進行搶答， 一號玩家按左邊的Shift按鍵搶答， 二號玩家按右邊的Shift按鍵搶答， 第一個按下Shift按鍵的玩家便可獲得這次回答機會， 按下鍵盤上的A、B、C、D按鍵來回答， 答錯的話就換另一個玩家回答， 不需按Shift按鍵， 一樣按下鍵盤上的A、B、C、D按鍵來回答。\
-                           一個題目最多回答四次， 答對一個選項加兩分， 答錯一個選項扣一分， 雙方可討論要不要按下'Enter'按鍵來跳過題目， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
+                           每次回答時間都只有三秒， 超過時間就換對方回答， 答對一個選項加兩分， 答錯一個選項扣一分， 按下'Enter'按鍵來換下一題， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
         
         ck.blit(start_ck,(0,0))     # 把word_wrap1()叫出來，並把說明文字丟進去，最後會呈現在遊戲說明畫面上
         pygame.display.update()     # 刷新畫面
@@ -450,7 +450,7 @@ def main():     # 主要遊戲開始了!
         if shift_avail == False and time_run == True and first == True:     # 按下Shift了，開始計時，而這是這個題目第一次被計時
             d_now = time.time()         # 記下當下時間
             differ = d_now - d_shift    # 把當下時間減去按下shift瞬間的時間，得出自從搶答後已經過了多少秒數
-            print(3 - differ)           # 用3-differ就是我要的計時器
+            # print(3 - differ)           # 用3-differ就是我要的計時器
             blit_timer = True           # 計時器運作了!
 
         if ans_turn == 1 and differ > 3 and time_run == True:       # 如果秒數大於三，代表這個玩家回答太久了
@@ -467,7 +467,7 @@ def main():     # 主要遊戲開始了!
         if times_up == True or change == True:      # 有人沒在時間內回答，或是有人回答了，都要換人，並重新計時
             d_now = time.time()                     # 記下當下時間
             differ = d_now - d_shift                # 和換人當下的秒數相減，就可以得出新的計時器
-            print(3 - differ)
+            # print(3 - differ)
             blit_timer = True                       # 計時器正在運作
         
         for event in pygame.event.get():    # 判斷玩家做了哪些動作
