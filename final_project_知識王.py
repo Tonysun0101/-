@@ -669,9 +669,9 @@ def main():     # 主要遊戲開始了!
             screen.blit(wrong_ans, (450,0))       # blit wrong_ans(也就是wrong)
             
         if type(ques_ans_number) == int:        # 讓所有選項blit出來
-            screen.blit(option_a, (100,400))
+            screen.blit(option_a, (50,400))
             screen.blit(option_b, (400,400))
-            screen.blit(option_c, (100,500))
+            screen.blit(option_c, (50,500))
             screen.blit(option_d, (400,500))
         screen.blit(score1, (80,60))            # 讓分數列表blit出來
         screen.blit(score2, (700,60))
