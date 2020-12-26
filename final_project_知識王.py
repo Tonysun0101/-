@@ -374,12 +374,12 @@ def timer_wrap(surf, text, font2, color=(255, 255, 255)):   # 計時器字型格
     words = text
     width, height = (600,500)
     line_spacing = font2.get_sized_height() + 2
-    x, y = 350, 50
+    x, y = 250, 50
     space = font2.get_rect(' ')
     for word in words:
         bounds = font2.get_rect(word)
         if x + bounds.width + bounds.x >= width:
-            x, y = 350, y + line_spacing
+            x, y = 250, y + line_spacing
         if x + bounds.width + bounds.x >= width:
             raise ValueError("word too wide for the surface")
         if y + bounds.height - bounds.y >= height:
@@ -650,9 +650,9 @@ def main():     # 主要遊戲開始了!
         option_d = option_d.render(str("(D)" + " " + answer_option[3]), (255,255,255),word_color_d)
 
         if correct == 1:                            # 如果這輪有人回答正確
-            screen.blit(correct_ans, (350, 0))    # blit correct_ans(也就是correct)
+            screen.blit(correct_ans, (450, 0))    # blit correct_ans(也就是correct)
         elif correct == 2:                          # 如果這輪有人回答錯誤
-            screen.blit(wrong_ans, (350,0))       # blit wrong_ans(也就是wrong)
+            screen.blit(wrong_ans, (450,0))       # blit wrong_ans(也就是wrong)
             
         if type(ques_ans_number) == int:        # 讓所有選項blit出來
             screen.blit(option_a, (100,400))
