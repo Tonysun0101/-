@@ -627,6 +627,7 @@ def main():     # 主要遊戲開始了!
                     
                     if init_number == len(select) - 1:      # 代表已經玩了十個題目了
                         pygame.mixer.music.pause()          # 緊張的音樂停止
+                        shift_avail = False
                         if init_score1 > init_score2:       # 顯示哪個玩家贏了
                             result = "P1 win"
                         elif init_score1 == init_score2:
