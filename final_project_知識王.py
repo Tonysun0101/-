@@ -453,12 +453,12 @@ def main():     # 主要遊戲開始了!
             # print(3 - differ)           # 用3-differ就是我要的計時器
             blit_timer = True           # 計時器運作了!
 
-        if ans_turn == 1 and differ > 3 and time_run == True:       # 如果秒數大於三，代表這個玩家回答太久了
+        if ans_turn == 1 and differ > 5 and time_run == True:       # 如果秒數大於三，代表這個玩家回答太久了
             ans_turn = 2                # 換成二號回答
             first = False               # 這不是第一次計時了
             d_shift = time.time()       # 計下換人回答當下的時間
             times_up = True             # 計下有人沒在時間內回答
-        elif ans_turn == 2 and differ > 3 and time_run == True:     # 如果秒數大於三，代表這個玩家回答太久了
+        elif ans_turn == 2 and differ > 5 and time_run == True:     # 如果秒數大於三，代表這個玩家回答太久了
             ans_turn = 1                # 換成一號回答
             first = False               # 這不是第一次計時了
             d_shift = time.time()       # 計下換人回答當下的時間
@@ -653,7 +653,7 @@ def main():     # 主要遊戲開始了!
         
         word_wrap(screen, ques_list[select[init_number]], font0)        # 題目顯示
         if blit_timer == True:                                          # 計時器顯示，前提是blit_timer == True
-            timer_wrap(screen, str(round(3 - differ, 3)), font2)
+            timer_wrap(screen, str(round(5 - differ, 3)), font2)
         
         option_a = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 32)                            # 答案們的字型以及顏色
         option_a = option_a.render(str("(A)" + " " + answer_option[0]), (255,255,255),word_color_a)     # 除了ABCD，還要套入題庫中的答案
