@@ -22,37 +22,37 @@ start_ck2.fill((255,255,255))               # 白色畫布2(第一關遊戲介�
 
 # 載入所需的素材字型圖片顏色等等，並幫他們命名
 start_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 100)         # 設定開始介面的統一字型，給他一個名稱
-start_font_1 = start_font.render("進入遊戲", True, (0, 0, 255), (238, 130, 238, 255))    # 給三個選項各兩種顏色
-start_font_11 = start_font.render("進入遊戲", True, (0,255,255),(238, 130, 238, 255))      # 滑鼠游標放上去和沒放上去的兩種顏色
-start_font_2 = start_font.render("結束遊戲", True, (0,0,255),(0,255,0))
-start_font_21 = start_font.render("結束遊戲", True, (0,255,255),(0,255,0))
-start_font_3 = start_font.render("遊戲說明", True, (0,0,255),(0,255,0))
-start_font_31 = start_font.render("遊戲說明", True, (0,255,255),(0,255,0))
+start_font_1 = start_font.render("進入遊戲", True, (0, 0, 255), (162, 205, 90, 255))    # 給三個選項各兩種顏色
+start_font_11 = start_font.render("進入遊戲", True, (0,255,255),(162, 205, 90, 255))      # 滑鼠游標放上去和沒放上去的兩種顏色
+start_font_2 = start_font.render("結束遊戲", True, (0,0,255),(162, 205, 90, 255))
+start_font_21 = start_font.render("結束遊戲", True, (0,255,255),(162, 205, 90, 255))
+start_font_3 = start_font.render("遊戲說明", True, (0,0,255),(162, 205, 90, 255))
+start_font_31 = start_font.render("遊戲說明", True, (0,255,255),(162, 205, 90, 255))
 
 player_font = pygame.font.Font(None, 50)                                    # 玩家按Shift搶答後顏色的改變
-player1 = player_font.render("player1", True, (0,0,255),(0,255,0))          # 一樣分成兩種顏色
-player11 = player_font.render("player1", True, (0,255,255),(0,255,0))       # 先幫這兩種顏色取變數名稱
-player2 = player_font.render("player2", True, (0,0,255),(0,255,0))          # 1、2代表還沒按
-player21 = player_font.render("player2", True, (0,255,255),(0,255,0))       # 11、21代表已經按了
+player1 = player_font.render("player1", True, (0,0,255),(162, 205, 90, 255))          # 一樣分成兩種顏色
+player11 = player_font.render("player1", True, (0,255,255),(162, 205, 90, 255))       # 先幫這兩種顏色取變數名稱
+player2 = player_font.render("player2", True, (0,0,255),(162, 205, 90, 255))          # 1、2代表還沒按
+player21 = player_font.render("player2", True, (0,255,255),(162, 205, 90, 255))       # 11、21代表已經按了
 
 sub_font = pygame.font.Font(path + "NotoSansMonoCJKtc-Bold.otf", 50)        # 遊戲選單游標在上面與否的顏色
-sub1 = sub_font.render("運動", True, (0,0,255),(0,255,0))
-sub11 = sub_font.render("運動", True, (0,255,255),(0,255,0))
-sub2 = sub_font.render("英文", True, (0,0,255),(0,255,0))
-sub21 = sub_font.render("英文", True, (0,255,255),(0,255,0))
-sub3 = sub_font.render("地理", True, (0,0,255),(0,255,0))
-sub31 = sub_font.render("地理", True, (0,255,255),(0,255,0))
-sub4 = sub_font.render("影視", True, (0,0,255),(0,255,0))
-sub41 = sub_font.render("影視", True, (0,255,255),(0,255,0))
-sub5 = sub_font.render("國學", True, (0,0,255),(0,255,0))
-sub51 = sub_font.render("國學", True, (0,255,255),(0,255,0))
-sub6 = sub_font.render("隨機", True, (0,0,255),(0,255,0))
-sub61 = sub_font.render("隨機", True, (0,255,255),(0,255,0))
+sub1 = sub_font.render("運動", True, (0,0,255),(162, 205, 90, 255))
+sub11 = sub_font.render("運動", True, (0,255,255),(162, 205, 90, 255))
+sub2 = sub_font.render("英文", True, (0,0,255),(162, 205, 90, 255))
+sub21 = sub_font.render("英文", True, (0,255,255),(162, 205, 90, 255))
+sub3 = sub_font.render("地理", True, (0,0,255),(162, 205, 90, 255))
+sub31 = sub_font.render("地理", True, (0,255,255),(162, 205, 90, 255))
+sub4 = sub_font.render("影視", True, (0,0,255),(162, 205, 90, 255))
+sub41 = sub_font.render("影視", True, (0,255,255),(162, 205, 90, 255))
+sub5 = sub_font.render("國學", True, (0,0,255),(162, 205, 90, 255))
+sub51 = sub_font.render("國學", True, (0,255,255),(162, 205, 90, 255))
+sub6 = sub_font.render("隨機", True, (0,0,255),(162, 205, 90, 255))
+sub61 = sub_font.render("隨機", True, (0,255,255),(162, 205, 90, 255))
 
-info_start1 = sub_font.render("遊戲開始", True, (0,0,255),(0,255,0))
-info_start11 = sub_font.render("遊戲開始", True, (0,255,255),(0,255,0))
-info_start2 = sub_font.render("離開遊戲", True, (0,0,255),(0,255,0))
-info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(0,255,0))
+info_start1 = sub_font.render("遊戲開始", True, (0,0,255),(162, 205, 90, 255))
+info_start11 = sub_font.render("遊戲開始", True, (0,255,255),(162, 205, 90, 255))
+info_start2 = sub_font.render("離開遊戲", True, (0,0,255),(162, 205, 90, 255))
+info_start21 = sub_font.render("離開遊戲", True, (0,255,255),(162, 205, 90, 255))
 
 bg = pygame.image.load(path + 'brain.png')     # 整個遊戲的背景
 bg.convert()
@@ -266,7 +266,7 @@ def intro_function():       # 遊戲說明畫面
             start_ck.blit(info_start1, (100, 50))         # 什麼都不做，則起始畫面每個選項顏色不變
             start_ck.blit(info_start2, (500, 50))
         word_wrap1(start_ck,"按'遊戲開始'後， 點選滑鼠'右鍵'來選擇要玩哪個主題， 遊戲開始後兩個玩家進行搶答， 一號玩家按左邊的Shift按鍵搶答， 二號玩家按右邊的Shift按鍵搶答， 第一個按下Shift按鍵的玩家便可獲得這次回答機會， 按下鍵盤上的A、B、C、D按鍵來回答， 答錯的話就換另一個玩家回答， 不需按Shift按鍵， 一樣按下鍵盤上的A、B、C、D按鍵來回答。\
-                           每次回答時間都只有三秒， 超過時間就換對方回答， 答對一個選項加兩分， 答錯一個選項扣一分， 按下'Enter'按鍵來換下一題， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
+                           每次回答時間都只有五秒， 超過時間就換對方回答， 答對一個選項加兩分， 答錯一個選項扣一分， 按下'Enter'按鍵來換下一題， 總共會進行十個題目， 遊戲結束後分數高者獲勝。",font1)
         
         ck.blit(start_ck,(0,0))     # 把word_wrap1()叫出來，並把說明文字丟進去，最後會呈現在遊戲說明畫面上
         pygame.display.update()     # 刷新畫面
@@ -438,6 +438,7 @@ def main():     # 主要遊戲開始了!
     change = False      # 還沒換人回答(時間到了或者是有人回答了，就得換人回答)
     times_up = False    # 時間還沒到
     first = True        # 這是這個題目第一次被回答
+    ques_count = 1
     
     while not done:     # 開始跑一個無限回圈
         ques_ans_number = select[init_number]               # 在隨機清單裡面選第一個數字
@@ -624,6 +625,9 @@ def main():     # 主要遊戲開始了!
                     ans_turn = 0                    # 一開始沒有人回答
                     correct = 0                     # 一開始沒有人回答正確
                     shift_avail = True              # 開放搶答
+                    ques_count += 1
+                    if ques_count >= 10:
+                        ques_count = 10
                     
                     if init_number == len(select) - 1:      # 代表已經玩了十個題目了
                         pygame.mixer.music.pause()          # 緊張的音樂停止
@@ -651,7 +655,7 @@ def main():     # 主要遊戲開始了!
         score2 = pygame.font.Font(None, 50)                             # 二號玩家分數字型
         score2 = score2.render(str(init_score2), (0,0,255),(0,255,0))   # 二號玩家分數顏色
         
-        word_wrap(screen, ques_list[select[init_number]], font0)        # 題目顯示
+        word_wrap(screen, str(ques_count) + "." + ques_list[select[init_number]], font0)        # 題目顯示
         if blit_timer == True:                                          # 計時器顯示，前提是blit_timer == True
             timer_wrap(screen, str(round(5 - differ, 3)), font2)
         
